@@ -1,17 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SignInImg from "../../Assets/sign-in.svg";
+import RegisterImg from "../../Assets/Sign-up.svg";
 
-const Login = () => {
+const SignUp = () => {
   return (
     <div className="hero w-full my-10">
       <div className="hero-content grid md:grid-cols-2 gap-20 flex-col lg:flex-row">
         <div className="text-center lg:text-left">
-          <img className="w-[450px]" src={SignInImg} alt="" />
+          <img className="w-[450px]" src={RegisterImg} alt="" />
         </div>
         <div className="card w-full md:max-w-sm shadow-2xl bg-base-100">
-          <h1 className="text-5xl font-bold text-center mt-10">Sign In</h1>
+          <h1 className="text-5xl font-bold text-center mt-10">Sign up</h1>
           <form className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your name"
+                name="name"
+                required
+                className="input input-bordered"
+              />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -36,10 +48,19 @@ const Login = () => {
                 className="input input-bordered"
               />
             </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Role</span>
+              </label>
+              <select className="select select-bordered w-full max-w-xs">
+                <option selected>Buyer</option>
+                <option>Seller</option>
+              </select>
+            </div>
             <div className="form-control mt-6">
               <input
                 type="submit"
-                value="Sign In"
+                value="Sign up"
                 className="btn bg-red-700 hover:bg-red-600 border-none"
               />
             </div>
@@ -63,9 +84,9 @@ const Login = () => {
               </button>
             </div>
             <p className="text-md text-center sm:px-6 text-gray-600">
-              Don't have an account?{" "}
+              Already have an account?{" "}
               <button className="underline text-gray-800" type="submit">
-                <Link to="/signUp">Sign Up</Link>
+                <Link to="/signIn">Sign In</Link>
               </button>
             </p>
           </div>
@@ -75,4 +96,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
