@@ -3,6 +3,7 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import Main from "../Layouts/Main";
 import SignIn from "../Pages/Authentication/SignIn";
 import SignUp from "../Pages/Authentication/SignUp";
+import CategoryProducts from "../Pages/CategoryProducts/CategoryProducts";
 import AddAProduct from "../Pages/Dashboard/AddAProduct";
 import AllBuyers from "../Pages/Dashboard/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers";
@@ -28,6 +29,11 @@ export const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/category/:categoryName",
+        loader: ({ params }) =>fetch(`http://localhost:5000/category/${params.categoryName}`),
+        element: <CategoryProducts></CategoryProducts>,
       },
     ],
   },
