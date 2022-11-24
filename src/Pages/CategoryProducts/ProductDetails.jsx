@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import badge from "../../Assets/verified-badge.png";
+import BookingModal from "../Shared/BookingModal/BookingModal";
 
 const ProductDetails = () => {
   const { state: product } = useLocation();
-  console.log(product);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const {
     condition,
     description,
@@ -24,44 +25,50 @@ const ProductDetails = () => {
     _id,
   } = product;
   return (
-    <div className="flex justify-center my-20">
-      <div className="card bg-base-100 w-96 shadow-xl">
-        <figure>
-          <img src={img} alt="Shoes" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">{name}</h2>
-          <div className="flex">
-            <div className="text-lg">Seller: {seller_name}</div>
-            {seller_verification === true && (
-              <div>
-                <img src={badge} className="w-6 mx-3" alt="" />
-              </div>
-            )}
-          </div>
-          <p>{seller_email}</p>
-          <p>Number: {mobile_number}</p>
-          <p>Original price: {original_price}</p>
-          <p>Resell price: {resell_price}</p>
-          <p>Location: {location}</p>
-          <p>Condition: {condition}</p>
-          <p>Year used: {years_of_use}</p>
-          <p>Year of purchase: {year_of_purchase}</p>
-          <p>Post Date: {postDate}</p>
-          <p>
-            Status: <span className="text-green-500">{status}</span>
-          </p>
-          <p>{description}</p>
-          <div className="card-actions justify-center mt-3">
-            <button
-              type="button"
-              className="px-5 py-2 font-semibold border rounded border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100"
-            >
-              Book Now
-            </button>
+    <div>
+      <div className="flex justify-center my-20">
+        <div className="card bg-base-100 w-96 shadow-xl">
+          <figure>
+            <img src={img} alt="Shoes" />
+          </figure>
+          <div className="card-body">
+            <h2 className="card-title">{name}</h2>
+            <div className="flex">
+              <div className="text-lg">Seller: {seller_name}</div>
+              {seller_verification === true && (
+                <div>
+                  <img src={badge} className="w-6 mx-3" alt="" />
+                </div>
+              )}
+            </div>
+            <p>{seller_email}</p>
+            <p>Number: {mobile_number}</p>
+            <p>Original price: {original_price}</p>
+            <p>Resell price: {resell_price}</p>
+            <p>Location: {location}</p>
+            <p>Condition: {condition}</p>
+            <p>Year used: {years_of_use}</p>
+            <p>Year of purchase: {year_of_purchase}</p>
+            <p>Post Date: {postDate}</p>
+            <p>
+              Status: <span className="text-green-500">{status}</span>
+            </p>
+            <p>{description}</p>
+            <div className="card-actions justify-center mt-3">
+              <label
+                onClick={() => setSelectedProduct(product)}
+                htmlFor="ruby-booking-modal"
+                className="px-5 py-2 font-semibold border rounded border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100"
+              >
+                Book Now
+              </label>
+            </div>
           </div>
         </div>
       </div>
+      {selectedProduct && (
+        <BookingModal product={product} setProduct={selectedProduct}></BookingModal>
+      )}
     </div>
   );
 };
