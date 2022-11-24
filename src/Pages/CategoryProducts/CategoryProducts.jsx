@@ -1,9 +1,9 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import ProductCard from "../Cards/ProductCard";
 
 const CategoryProducts = () => {
   const products = useLoaderData();
-  console.log(products);
 
   return (
     <div className="my-16">
@@ -14,6 +14,11 @@ const CategoryProducts = () => {
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
         </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-16">
+        {products?.map((product) => (
+          <ProductCard product={product} key={product._id}></ProductCard>
+        ))}
       </div>
     </div>
   );

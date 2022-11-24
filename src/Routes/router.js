@@ -4,6 +4,7 @@ import Main from "../Layouts/Main";
 import SignIn from "../Pages/Authentication/SignIn";
 import SignUp from "../Pages/Authentication/SignUp";
 import CategoryProducts from "../Pages/CategoryProducts/CategoryProducts";
+import ProductDetails from "../Pages/CategoryProducts/ProductDetails";
 import AddAProduct from "../Pages/Dashboard/AddAProduct";
 import AllBuyers from "../Pages/Dashboard/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>fetch(`http://localhost:5000/category/${params.categoryName}`),
         element: <CategoryProducts></CategoryProducts>,
       },
+      {
+        path: '/productDetails',
+        element: <ProductDetails></ProductDetails>
+      }
     ],
   },
   {
