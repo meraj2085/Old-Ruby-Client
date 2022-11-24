@@ -2,9 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import badge from "../../Assets/verified-badge.png";
 
-const ProductCard = ({ product }) => {
-  const { name, img, seller_name,resell_price, seller_verification, description, location } =
-    product;
+const ProductCard = ({ product, setProduct }) => {
+  const {
+    name,
+    img,
+    seller_name,
+    resell_price,
+    seller_verification,
+    description,
+    location,
+  } = product;
   const navigate = useNavigate();
 
   return (
@@ -26,12 +33,13 @@ const ProductCard = ({ product }) => {
         <p>Price: ${resell_price}</p>
         <p>{description}</p>
         <div className="card-actions justify-between mt-4">
-          <button
-            type="button"
+          <label
+          onClick={()=>setProduct(product)}
+            htmlFor="ruby-booking-modal"
             className="px-5 py-2 font-semibold border rounded border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100"
           >
             Book Now
-          </button>
+          </label>
           <button
             onClick={() => navigate("/productDetails", { state: product })}
             type="button"
