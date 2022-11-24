@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterImg from "../../Assets/Sign-up.svg";
 import toast from 'react-hot-toast';
 import { AuthContext } from "../../Contexts/AuthProvider";
@@ -17,6 +17,10 @@ const SignUp = () => {
   } = useContext(AuthContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const handleUserSignUp = data => {
     createUser(data.email, data.password)
     .then(result =>{
@@ -25,7 +29,8 @@ const SignUp = () => {
       updateUserProfile(data.name)
       .then(result =>{
         toast.success('User create successful', {duration: 3000})
-        setLoading(false)
+        setLoading(false);
+        navigate(from, { replace: true });
       })
       .catch(err =>{
         console.error(err.message);
@@ -42,7 +47,8 @@ const SignUp = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        getToken(user)
+        getToken(user);
+        navigate(from, { replace: true })
       })
       .catch((err) => {
         console.error(err.message);

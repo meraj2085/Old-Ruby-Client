@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SignInImg from "../../Assets/sign-in.svg";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -16,12 +16,17 @@ const SignIn = () => {
   const { signInWithGoogle, signIn, loading, setLoading } =
     useContext(AuthContext);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
         getToken(user);
         setLoading(false);
+        navigate(from, { replace: true })
       })
       .catch((err) => {
         console.error(err.message);
@@ -35,6 +40,7 @@ const SignIn = () => {
         const user = result.user;
         getToken(user);
         setLoading(false);
+        navigate(from, { replace: true })
       })
       .catch((err) => {
         console.error(err.message);
