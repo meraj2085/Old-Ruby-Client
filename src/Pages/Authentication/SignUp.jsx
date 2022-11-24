@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import RegisterImg from "../../Assets/Sign-up.svg";
+import toast from 'react-hot-toast';
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignUp = () => {
@@ -11,6 +13,21 @@ const SignUp = () => {
     loading,
     setLoading,
   } = useContext(AuthContext);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const handleUserSignUp = data => {
+    createUser(data.email, data.password)
+    .then(result =>{
+      const user = result.user;
+      updateUserProfile(data.name)
+      .then(result =>{
+        toast.success('User create successful', {duration: 3000})
+      })
+    })
+    .catch(err =>{
+      console.error(err.message);
+    })
+  };
 
   const handleGoogleLogin = () => {
     signInWithGoogle()
@@ -30,13 +47,14 @@ const SignUp = () => {
         </div>
         <div className="card w-full md:max-w-sm shadow-2xl bg-base-100">
           <h1 className="text-5xl font-bold text-center mt-10">Sign up</h1>
-          <form className="card-body">
+          <form onSubmit={handleSubmit(handleUserSignUp)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
               <input
                 type="text"
+                {...register("name")}
                 placeholder="Your name"
                 name="name"
                 required
@@ -49,6 +67,7 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
+                {...register("email")}
                 placeholder="Your email"
                 name="email"
                 required
@@ -61,6 +80,7 @@ const SignUp = () => {
               </label>
               <input
                 type="password"
+                {...register("password")}
                 name="password"
                 required
                 placeholder="Your password"
@@ -73,6 +93,7 @@ const SignUp = () => {
               </label>
               <select
                 defaultValue="Buyer"
+                {...register("role")}
                 className="select select-bordered w-full max-w-xs"
               >
                 <option>Buyer</option>

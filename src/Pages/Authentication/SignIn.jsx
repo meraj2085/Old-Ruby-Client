@@ -1,10 +1,35 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import SignInImg from "../../Assets/sign-in.svg";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignIn = () => {
-  const {signInWithGoogle, signIn, loading, setLoading} = useContext(AuthContext)
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { signInWithGoogle, signIn, loading, setLoading } =
+    useContext(AuthContext);
+
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+  };
+
+  const handleUserSignIn = (data) =>{
+    signIn(data.email, data.password)
+    .then(result =>{
+      const user = result.user;
+    })
+    .catch(err =>{
+      console.error(err.message);
+    })
+  }
 
   return (
     <div className="hero w-full my-10">
@@ -14,13 +39,14 @@ const SignIn = () => {
         </div>
         <div className="card w-full md:max-w-sm shadow-2xl bg-base-100">
           <h1 className="text-5xl font-bold text-center mt-10">Sign In</h1>
-          <form className="card-body">
+          <form onSubmit={handleSubmit(handleUserSignIn)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="text"
+                {...register("email")}
                 placeholder="Your email"
                 name="email"
                 required
@@ -34,6 +60,7 @@ const SignIn = () => {
               <input
                 type="password"
                 name="password"
+                {...register("password")}
                 required
                 placeholder="Your password"
                 className="input input-bordered"
@@ -53,6 +80,7 @@ const SignIn = () => {
             </div>
             <div className="flex justify-center space-x-4 mt-5">
               <button
+                onClick={handleGoogleLogin}
                 aria-label="Log in with Google"
                 className="p-3 flex text-center rounded-sm"
               >
