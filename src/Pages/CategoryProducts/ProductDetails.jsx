@@ -52,8 +52,13 @@ const ProductDetails = () => {
             Status: <span className="text-green-500">{status}</span>
           </p>
           <p>{description}</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+          <div className="card-actions justify-center mt-3">
+            <button
+              type="button"
+              className="px-5 py-2 font-semibold border rounded border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100"
+            >
+              Book Now
+            </button>
           </div>
         </div>
       </div>
