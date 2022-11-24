@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 
-const BookingModal = ({ product }) => {
+const BookingModal = ({ product, setProduct }) => {
   const { user } = useContext(AuthContext);
-//   const {
-//     name,
-//     img,
-//     seller_name,
-//     resell_price,
-//     seller_verification,
-//     description,
-//     location,
-//   } = product;
+
+  const handleBooking = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const buyer_name = form.buyer_name.value;
+    const buyer_email = form.buyer_email.value;
+    const item_name = form.item_name.value;
+    const item_price = form.item_price.value;
+    const buyer_number = form.buyer_number.value;
+    const meeting_location = form.meeting_location.value;
+    const booking = {buyer_name, buyer_email,buyer_number, item_name,item_price, meeting_location }
+  };
 
   return (
     <div>
@@ -20,14 +23,96 @@ const BookingModal = ({ product }) => {
         <div className="modal-box relative">
           <label
             htmlFor="ruby-booking-modal"
+            onClick={() => setProduct(null)}
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
-          <p className="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
+          <div className="py-4">
+            <form onSubmit={handleBooking} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="buyer_name"
+                  required
+                  defaultValue={user?.displayName}
+                  disabled
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="text"
+                  name="buyer_email"
+                  defaultValue={user?.email}
+                  disabled
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Item name</span>
+                </label>
+                <input
+                  type="text"
+                  name="item_name"
+                  defaultValue={product?.name}
+                  disabled
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Item price</span>
+                </label>
+                <input
+                  type="text"
+                  name="item_price"
+                  defaultValue={product?.resell_price}
+                  disabled
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Phone number</span>
+                </label>
+                <input
+                  type="text"
+                  name="buyer_number"
+                  required
+                  placeholder="Your phone number"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Meeting location</span>
+                </label>
+                <input
+                  type="text"
+                  name="meeting_location"
+                  required
+                  placeholder="Meeting location"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control mt-6">
+                <button
+                  type="submit"
+                  className="btn bg-red-700 hover:bg-red-600 border-none"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

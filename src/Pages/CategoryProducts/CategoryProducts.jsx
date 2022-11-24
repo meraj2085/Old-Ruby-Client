@@ -22,7 +22,7 @@ const CategoryProducts = () => {
           <ProductCard product={product} setProduct={setProduct} key={product._id}></ProductCard>
         ))}
       </div>
-      <BookingModal product={product}></BookingModal>
+      <BookingModal product={product} setProduct={setProduct}></BookingModal>
     </div>
   );
 };
