@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import RegisterImg from "../../Assets/Sign-up.svg";
 import toast from 'react-hot-toast';
 import { AuthContext } from "../../Contexts/AuthProvider";
+import { getToken } from "../../Api/getToken";
 
 const SignUp = () => {
   const {
@@ -19,6 +20,7 @@ const SignUp = () => {
     createUser(data.email, data.password)
     .then(result =>{
       const user = result.user;
+      getToken(user, data.role)
       updateUserProfile(data.name)
       .then(result =>{
         toast.success('User create successful', {duration: 3000})
@@ -33,6 +35,7 @@ const SignUp = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
+        getToken(user)
       })
       .catch((err) => {
         console.error(err.message);

@@ -4,6 +4,7 @@ import SignInImg from "../../Assets/sign-in.svg";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import { getToken } from "../../Api/getToken";
 
 const SignIn = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -15,6 +16,7 @@ const SignIn = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
+        getToken(user)
       })
       .catch((err) => {
         console.error(err.message);
@@ -25,6 +27,7 @@ const SignIn = () => {
     signIn(data.email, data.password)
     .then(result =>{
       const user = result.user;
+      getToken(user)
     })
     .catch(err =>{
       console.error(err.message);
