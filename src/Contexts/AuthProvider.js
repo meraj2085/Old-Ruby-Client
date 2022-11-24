@@ -19,6 +19,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState(null)
   
   // Create User with email & password
   const createUser = (email, password) => {
@@ -55,6 +56,7 @@ const AuthProvider = ({ children }) => {
 
   // Logout
   const logout = () => {
+    setRole(null)
     setLoading(true);
     localStorage.removeItem("OldRuby-Token");
     return signOut(auth);
@@ -81,6 +83,8 @@ const AuthProvider = ({ children }) => {
     logout,
     loading,
     setLoading,
+    role,
+    setRole
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { getRole } from "../Api/getRole";
+import { AuthContext } from "../Contexts/AuthProvider";
 import Footer from "../Pages/Shared/Footer/Footer";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
+import AuthenticationSpinner from "../Pages/Shared/Spinners/AuthenticationSpinner";
 
 const DashboardLayout = () => {
+  const {user, role, setRole} = useContext(AuthContext)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    getRole(user?.email)
+    .then(data => {
+      setRole(data)
+      setLoading(false)
+    })
+  }, [user, setRole])
+
+  console.log(role);
+
+
   return (
     <>
       <Navbar></Navbar>

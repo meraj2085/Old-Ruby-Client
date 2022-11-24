@@ -4,7 +4,7 @@ import SignInImg from "../../Assets/sign-in.svg";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Contexts/AuthProvider";
-import { getToken } from "../../Api/getToken";
+import { getToken, token } from "../../Api/getToken";
 import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const SignIn = () => {
@@ -24,7 +24,7 @@ const SignIn = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        getToken(user);
+        token(user);
         setLoading(false);
         navigate(from, { replace: true })
       })
@@ -38,7 +38,7 @@ const SignIn = () => {
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        getToken(user);
+        token(user);
         setLoading(false);
         navigate(from, { replace: true })
       })
