@@ -1,5 +1,6 @@
 import React from 'react';
 import sellingImg from '../../Assets/home-img.svg'
+import Catagories from '../Catagories/Catagories';
 
 const Home = () => {
   return (
@@ -28,6 +29,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Catagories></Catagories>
     </div>
   );
 };
