@@ -1,3 +1,5 @@
+// Get jwt token & save user info in DB
+
 export const getToken = (user, role) => {
   const currentUser = {
     email: user.email,

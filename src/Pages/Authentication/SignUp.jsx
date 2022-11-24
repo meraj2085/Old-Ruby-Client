@@ -5,6 +5,7 @@ import RegisterImg from "../../Assets/Sign-up.svg";
 import toast from 'react-hot-toast';
 import { AuthContext } from "../../Contexts/AuthProvider";
 import { getToken } from "../../Api/getToken";
+import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const SignUp = () => {
   const {
@@ -24,10 +25,16 @@ const SignUp = () => {
       updateUserProfile(data.name)
       .then(result =>{
         toast.success('User create successful', {duration: 3000})
+        setLoading(false)
+      })
+      .catch(err =>{
+        console.error(err.message);
+        setLoading(false)
       })
     })
     .catch(err =>{
       console.error(err.message);
+      setLoading(false)
     })
   };
 
@@ -39,6 +46,7 @@ const SignUp = () => {
       })
       .catch((err) => {
         console.error(err.message);
+        setLoading(false)
       });
   };
 
@@ -103,13 +111,12 @@ const SignUp = () => {
                 <option>Seller</option>
               </select>
             </div>
-            <div className="form-control mt-6">
-              <input
+            <button
                 type="submit"
-                value="Sign up"
                 className="btn bg-red-700 hover:bg-red-600 border-none"
-              />
-            </div>
+              >
+                {loading ? <AuthenticationSpinner /> : "Sign Up"}
+              </button>
           </form>
           <div className="mb-10">
             <div className="flex items-center pt-4 space-x-1">

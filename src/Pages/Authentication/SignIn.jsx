@@ -5,34 +5,42 @@ import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import { getToken } from "../../Api/getToken";
+import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const SignIn = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const { signInWithGoogle, signIn, loading, setLoading } =
     useContext(AuthContext);
-
 
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        getToken(user)
+        getToken(user);
+        setLoading(false);
       })
       .catch((err) => {
         console.error(err.message);
+        setLoading(false);
       });
   };
 
-  const handleUserSignIn = (data) =>{
+  const handleUserSignIn = (data) => {
     signIn(data.email, data.password)
-    .then(result =>{
-      const user = result.user;
-      getToken(user)
-    })
-    .catch(err =>{
-      console.error(err.message);
-    })
-  }
+      .then((result) => {
+        const user = result.user;
+        getToken(user);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        setLoading(false);
+      });
+  };
 
   return (
     <div className="hero w-full my-10">
@@ -70,11 +78,12 @@ const SignIn = () => {
               />
             </div>
             <div className="form-control mt-6">
-              <input
+              <button
                 type="submit"
-                value="Sign In"
                 className="btn bg-red-700 hover:bg-red-600 border-none"
-              />
+              >
+                {loading ? <AuthenticationSpinner /> : "Sign In"}
+              </button>
             </div>
           </form>
           <div className="mb-10">
