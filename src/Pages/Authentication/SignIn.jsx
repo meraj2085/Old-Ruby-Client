@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import SignInImg from "../../Assets/sign-in.svg";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
-const Login = () => {
+const SignIn = () => {
+  const {signInWithGoogle, signIn, loading, setLoading} = useContext(AuthContext)
+
   return (
     <div className="hero w-full my-10">
       <div className="hero-content grid md:grid-cols-2 gap-20 flex-col lg:flex-row">
@@ -75,4 +78,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;

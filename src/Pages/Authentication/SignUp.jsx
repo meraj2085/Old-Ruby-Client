@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import RegisterImg from "../../Assets/Sign-up.svg";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignUp = () => {
+  const {
+    createUser,
+    updateUserProfile,
+    signInWithGoogle,
+    loading,
+    setLoading,
+  } = useContext(AuthContext);
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+  };
+
   return (
     <div className="hero w-full my-10">
       <div className="hero-content grid md:grid-cols-2 gap-20 flex-col lg:flex-row">
@@ -52,8 +71,11 @@ const SignUp = () => {
               <label className="label">
                 <span className="label-text">Role</span>
               </label>
-              <select className="select select-bordered w-full max-w-xs">
-                <option selected>Buyer</option>
+              <select
+                defaultValue="Buyer"
+                className="select select-bordered w-full max-w-xs"
+              >
+                <option>Buyer</option>
                 <option>Seller</option>
               </select>
             </div>
@@ -71,6 +93,7 @@ const SignUp = () => {
             </div>
             <div className="flex justify-center space-x-4 mt-5">
               <button
+                onClick={handleGoogleLogin}
                 aria-label="Log in with Google"
                 className="p-3 flex text-center rounded-sm"
               >

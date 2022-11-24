@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../Assets/ruby.png";
+import { AuthContext } from "../../../Contexts/AuthProvider";
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+  
+  const handleLogOut = () =>{
+    logout()
+    .then(result =>{
+      toast.success('Logout successful', {duration: 3000});
+    }).catch(err =>{
+      console.log(err.message);
+    })
+  }
+
   return (
     <header className="px-16 py-3 bg-gray-100 text-gray-800">
       <div className="container flex justify-between mx-auto">
@@ -42,11 +55,23 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex">
-          <Link to='/signIn'>
-          <button className="self-center px-8 py-3 font-semibold rounded bg-red-700 text-gray-50">
-            Sign in
-          </button>
-          </Link>
+          {user?.uid ? (
+            <>
+              <p onClick={handleLogOut}>
+                <button className="self-center px-8 py-3 font-semibold rounded bg-red-700 text-gray-50">
+                  Logout
+                </button>
+              </p>
+            </>
+          ) : (
+            <>
+              <Link to="/signIn">
+                <button className="self-center px-8 py-3 font-semibold rounded bg-red-700 text-gray-50">
+                  Sign in
+                </button>
+              </Link>
+            </>
+          )}
         </div>
         <button className="p-4 lg:hidden">
           <svg
