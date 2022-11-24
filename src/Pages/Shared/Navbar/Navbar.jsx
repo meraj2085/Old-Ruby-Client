@@ -39,8 +39,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="flex">
-            <Link to="/" className="flex items-center px-4 hover:text-red-700">
-              Link
+            <Link to="/dashboard" className="flex items-center px-4 hover:text-red-700">
+              Dashboard
             </Link>
           </li>
           <li className="flex">
