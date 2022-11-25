@@ -32,6 +32,7 @@ const AddAProduct = () => {
     const seller_verification = false;
     const advertised = false;
     const status = "available";
+    const reported = false;
 
     getImageLink(formData).then((imgData) => {
       const img = imgData.data.display_url;
@@ -53,6 +54,7 @@ const AddAProduct = () => {
         mobile_number,
         description,
         advertised,
+        reported
       };
       addProduct(product)
       .then(data =>{

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import ProductCard from "../Cards/ProductCard";
 import BookingModal from "../Shared/BookingModal/BookingModal";
+import ReportModal from "../Shared/ReportModal/ReportModal";
 
 const CategoryProducts = () => {
   const products = useLoaderData();
   const [product, setProduct] = useState(null);
+  const [reportedItem, setReportedItem] = useState(null);
 
   return (
     <div className="my-16">
@@ -23,12 +25,15 @@ const CategoryProducts = () => {
             product={product}
             setProduct={setProduct}
             key={product._id}
+            reportedItem={reportedItem}
+            setReportedItem={setReportedItem}
           ></ProductCard>
         ))}
       </div>
       {product && (
         <BookingModal product={product} setProduct={setProduct}></BookingModal>
       )}
+      {reportedItem && <ReportModal reportedItem={reportedItem} setReportedItem={setReportedItem}></ReportModal>}
     </div>
   );
 };

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import UserDeleteModal from "../Shared/UserDeleteModal/UserDeleteModal";
 
 const AllBuyers = () => {
   const [buyers, setBuyers] = useState(null);
-  const [toggle, setToggle] = useState(true);
-  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:5000/users?role=Buyer")
@@ -12,7 +9,7 @@ const AllBuyers = () => {
       .then((data) => {
         setBuyers(data);
       });
-  }, [toggle]);
+  }, []);
 
   return (
     <div>
@@ -33,13 +30,12 @@ const AllBuyers = () => {
                   <th>{i + 1}</th>
                   <td>{seller?.email}</td>
                   <td>
-                    <label
-                      onClick={() => setUserId(seller?.email)}
+                    <button
                       htmlFor="ruby-userDeleteModal"
                       className="btn btn-xs"
                     >
                       Delete
-                    </label>
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -47,14 +43,6 @@ const AllBuyers = () => {
           </table>
         </div>
       </div>
-      {userId && (
-        <UserDeleteModal
-          setUserId={setUserId}
-          userId={userId}
-          toggle={toggle}
-          setToggle={setToggle}
-        ></UserDeleteModal>
-      )}
     </div>
   );
 };
