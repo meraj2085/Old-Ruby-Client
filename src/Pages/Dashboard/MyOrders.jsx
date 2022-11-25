@@ -36,7 +36,13 @@ const MyOrders = () => {
               {orders?.map((order, i) => (
                 <tr>
                   <th>{i + 1}</th>
-                  <td>Cy Ganderton</td>
+                  <td>
+                    <div className="avatar">
+                      <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src={order?.img} alt="" />
+                      </div>
+                    </div>
+                  </td>
                   <td>{order?.item_name}</td>
                   <td>{order?.item_price}</td>
                   <td>
