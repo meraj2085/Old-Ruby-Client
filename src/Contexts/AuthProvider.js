@@ -20,7 +20,6 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState(null);
-  const [verificationStatus, setVerificationStatus] = useState(false)
   
   // Create User with email & password
   const createUser = (email, password) => {
@@ -74,19 +73,6 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  useEffect(()=>{
-    fetch(`http://localhost:5000/user/${user?.email}`,{
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,
-      },
-    })
-    .then(res => res.json())
-    .then(data => setVerificationStatus(data?.seller_verification))
-  },[user])
-
-  // console.log('Status', verificationStatus);
-
   const value = {
     user,
     createUser,
@@ -99,7 +85,6 @@ const AuthProvider = ({ children }) => {
     setLoading,
     role,
     setRole,
-    verificationStatus
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

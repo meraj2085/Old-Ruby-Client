@@ -20,8 +20,6 @@ const DashboardLayout = () => {
     });
   }, [user, setRole]);
 
-  console.log(role);
-
   return (
     <>
       <Navbar></Navbar>

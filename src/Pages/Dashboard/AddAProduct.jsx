@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const AddAProduct = () => {
-  const { user, verificationStatus } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleAddProduct = (event) => {
@@ -29,40 +29,43 @@ const AddAProduct = () => {
     const mobile_number = form.mobile_number.value;
     const description = form.description.value;
     const postDate = format(new Date(), "PP");
-    const seller_verification = verificationStatus;
     const advertised = false;
     const status = "available";
     const reported = false;
-
     getImageLink(formData).then((imgData) => {
       const img = imgData.data.display_url;
-      const product = {
-        name,
-        img,
-        category,
-        location,
-        postDate,
-        original_price,
-        resell_price,
-        years_of_use,
-        year_of_purchase,
-        seller_email,
-        seller_name,
-        seller_verification,
-        condition,
-        status,
-        mobile_number,
-        description,
-        advertised,
-        reported
-      };
-      addProduct(product)
-      .then(data =>{
-          if(data?.insertedId){
-               toast.success('Product added successfully.', {duration: 3000})
-               navigate('/dashboard/myProducts')
-          }
-      })
+      fetch(`http://localhost:5000/verification/habiba@gmail.com`)
+        .then((res) => res.json())
+        .then((data) => {
+          const seller_verification = data;
+          const product = {
+            name,
+            img,
+            category,
+            location,
+            postDate,
+            original_price,
+            resell_price,
+            years_of_use,
+            year_of_purchase,
+            seller_email,
+            seller_name,
+            seller_verification,
+            condition,
+            status,
+            mobile_number,
+            description,
+            advertised,
+            reported,
+          };
+    
+          addProduct(product).then((data) => {
+            if (data?.insertedId) {
+              toast.success("Product added successfully.", { duration: 3000 });
+              navigate("/dashboard/myProducts");
+            }
+          });
+        });
     });
   };
 

@@ -9,7 +9,7 @@ const ReportModal = ({ reportedItem, setReportedItem }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.acknowledged) {
-          toast.success("Reported dome", { duration: 2000 });
+          toast.success("Reported done", { duration: 2000 });
           setReportedItem(null);
         }
       });
