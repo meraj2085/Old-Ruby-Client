@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import EditStatusModal from "../Shared/EditStatusModal/EditStatusModal";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
@@ -36,16 +37,27 @@ const MyProducts = () => {
                   <td>{product?.name}</td>
                   <td>{product?.resell_price}</td>
                   <td>
-                    <button
-                      type="button"
-                      className={`px-2 py-1 font-semibold border rounded hover:border-gray-800 text-gray-800 ${
-                        product?.status === "available"
-                          ? "text-green-600"
-                          : "text-red-600"
-                      }`}
-                    >
-                      {product?.status}
-                    </button>
+                    {product?.status === "available" && (
+                      <label
+                        type="button"
+                        htmlFor="ruby-editStatusModal"
+                        className={
+                          "px-2 text-green-500 py-1 font-semibold border rounded hover:border-gray-8000"
+                        }
+                      >
+                        Available
+                      </label>
+                    )}
+                    {product?.status === "sold" && (
+                      <button
+                        type="button"
+                        className={
+                          "px-6 py-1 font-semibold border rounded hover:border-gray-800 text-red-500"
+                        }
+                      >
+                        Sold
+                      </button>
+                    )}
                   </td>
                   <td>
                     <button className="btn btn-xs">Delete</button>
@@ -65,6 +77,7 @@ const MyProducts = () => {
           </table>
         </div>
       </div>
+      <EditStatusModal></EditStatusModal>
     </div>
   );
 };
