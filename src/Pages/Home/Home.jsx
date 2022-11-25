@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import sellingImg from '../../Assets/home-img.svg'
+import Advertise from '../Advertise/Advertise';
 import Catagories from '../Catagories/Catagories';
 
 const Home = () => {
+  const [advertisedProduct, setAdvertisedProduct] = useState(null);
+  useEffect(()=>{
+    fetch('http://localhost:5000/advertised')
+    .then(res => res.json())
+    .then(data => setAdvertisedProduct(data))
+  },[])
+  
   return (
     <div>
       <div className="px-4 py-16 mx-auto min-h-screen sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -30,6 +38,7 @@ const Home = () => {
         </div>
       </div>
       <Catagories></Catagories>
+      {advertisedProduct && <Advertise advertisedProduct={advertisedProduct}></Advertise>}
     </div>
   );
 };
