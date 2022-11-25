@@ -2,13 +2,24 @@ import React, { useEffect, useState } from "react";
 
 const AllSellers = () => {
   const [sellers, setSellers] = useState(null);
+  const [toggle, setToggle] = useState(true)
   useEffect(() => {
     fetch("http://localhost:5000/users?role=Seller")
       .then((res) => res.json())
       .then((data) => {
         setSellers(data);
       });
-  }, []);
+  }, [toggle]);
+
+  const handleVerify = (email) =>{
+    fetch(`http://localhost:5000/verificationStatus?email=${email}`,{
+      method: "PUT"
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setToggle(!toggle);
+      });
+  }
 
   return (
     <div>
@@ -20,15 +31,31 @@ const AllSellers = () => {
               <tr>
                 <th></th>
                 <th>Email</th>
-                <th>Action</th>
+                <th>Delete</th>
+                <th>Verify</th>
               </tr>
             </thead>
             <tbody>
               {sellers?.map((seller, i) => (
-                <tr>
+                <tr key={seller._id}>
                   <th>{i + 1}</th>
                   <td>{seller?.email}</td>
-                  <td><button className="btn btn-xs">Delete</button></td>
+                  <td>
+                    <button className="btn btn-xs bg-red-500 border-none">
+                      Delete
+                    </button>
+                  </td>
+                  <td>
+                    {seller?.seller_verification ? (
+                      <button className="border-none text-green-600">
+                        Verified
+                      </button>
+                    ) : (
+                      <button onClick={()=>handleVerify(seller?.email)} className="btn btn-xs bg-blue-400 border-none">
+                        Verify
+                      </button>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

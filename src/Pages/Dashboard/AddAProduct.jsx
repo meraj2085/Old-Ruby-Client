@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const AddAProduct = () => {
-  const { user } = useContext(AuthContext);
+  const { user, verificationStatus } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleAddProduct = (event) => {
@@ -29,7 +29,7 @@ const AddAProduct = () => {
     const mobile_number = form.mobile_number.value;
     const description = form.description.value;
     const postDate = format(new Date(), "PP");
-    const seller_verification = false;
+    const seller_verification = verificationStatus;
     const advertised = false;
     const status = "available";
     const reported = false;

@@ -4,6 +4,7 @@ export const getToken = (user, role) => {
   const currentUser = {
     email: user.email,
     role: role ? role : "Buyer",
+    seller_verification: false,
   };
 
   fetch(`http://localhost:5000/user/${user?.email}`, {
