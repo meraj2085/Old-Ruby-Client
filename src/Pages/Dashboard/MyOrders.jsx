@@ -46,18 +46,27 @@ const MyOrders = () => {
                   <td>{order?.item_name}</td>
                   <td>{order?.item_price}</td>
                   <td>
-                    <label
-                      onClick={() => setDeleteOrder(order?._id)}
-                      htmlFor="ruby-cancelOrderModal"
-                      className="px-6 py-1 font-semibold border rounded hover:border-red-500 text-red-500"
-                    >
-                      Cancel
-                    </label>
+                    {!order?.payment && (
+                      <label
+                        onClick={() => setDeleteOrder(order?._id)}
+                        htmlFor="ruby-cancelOrderModal"
+                        className="px-6 py-1 font-semibold border rounded hover:border-red-500 text-red-500"
+                      >
+                        Cancel
+                      </label>
+                    )}
                   </td>
                   <td>
-                    <button className="px-6 py-1 font-semibold border rounded hover:border-green-500 text-green-500">
-                      Pay
-                    </button>
+                    {order?.payment && (
+                      <button className="px-6 py-1 font-semibold border rounded hover:border-green-500 text-green-500">
+                        Paid
+                      </button>
+                    )}
+                    {!order?.payment && (
+                      <button className="px-6 py-1 font-semibold border rounded hover:border-blue-500 text-blue-500">
+                        Pay
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

@@ -15,7 +15,8 @@ const BookingModal = ({ product, setProduct }) => {
     const buyer_number = form.buyer_number.value;
     const meeting_location = form.meeting_location.value;
     const img = product?.img;
-    const booking = {buyer_name, buyer_email,buyer_number, item_name,item_price, meeting_location, img }
+    const payment = false;
+    const booking = {buyer_name, buyer_email,buyer_number, item_name,item_price, meeting_location, img , payment}
 
     fetch("http://localhost:5000/booking", {
       method: "PUT",
