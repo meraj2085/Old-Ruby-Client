@@ -1,5 +1,6 @@
 import { itMatchesOne } from "daisyui/src/lib/postcss-prefixer/utils";
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import BookingCancelModal from "../Shared/BookingCancelModal/BookingCancelModal";
 
@@ -63,9 +64,11 @@ const MyOrders = () => {
                       </button>
                     )}
                     {!order?.payment && (
-                      <button className="px-6 py-1 font-semibold border rounded hover:border-blue-500 text-blue-500">
-                        Pay
-                      </button>
+                      <Link to={`/dashboard/payment/${order?._id}`}>
+                        <button className="px-6 py-1 font-semibold border rounded hover:border-blue-500 text-blue-500">
+                          Pay
+                        </button>
+                      </Link>
                     )}
                   </td>
                 </tr>
