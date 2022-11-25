@@ -1,18 +1,22 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { format } from "date-fns";
 import { getImageLink } from "../../Api/getImageLink";
+import { addProduct } from "../../Api/addProduct";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddAProduct = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const image = form.img.files[0]
-    const formData = new FormData()
-    formData.append('image', image)
+    const image = form.img.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
     const category = form.category.value;
     const location = form.location.value;
     const resell_price = form.resell_price.value;
@@ -24,36 +28,41 @@ const AddAProduct = () => {
     const condition = form.condition.value;
     const mobile_number = form.mobile_number.value;
     const description = form.description.value;
-    const postDate = format(new Date(), "PP")
+    const postDate = format(new Date(), "PP");
     const seller_verification = false;
     const advertised = false;
-    const status = 'available';
-    
-    getImageLink(formData)
-    .then(imgData =>{
-     console.log(imgData.data.display_url);
-    })
+    const status = "available";
+
+    getImageLink(formData).then((imgData) => {
+      const img = imgData.data.display_url;
+      const product = {
+        name,
+        img,
+        category,
+        location,
+        postDate,
+        original_price,
+        resell_price,
+        years_of_use,
+        year_of_purchase,
+        seller_email,
+        seller_name,
+        seller_verification,
+        condition,
+        status,
+        mobile_number,
+        description,
+        advertised,
+      };
+      addProduct(product)
+      .then(data =>{
+          if(data?.insertedId){
+               toast.success('Product added successfully.', {duration: 3000})
+               navigate('/dashboard/myProducts')
+          }
+      })
+    });
   };
-
-  // name,//.
-  // img,//......................//.
-  // category,//.
-  // location, //.
-
-  // postDate,.................//look.
-
-  // original_price,//.
-  // resell_price,//.
-  // years_of_use,//.
-  // year_of_purchase,//.
-  // seller_name,//.
-  // seller_email,//.
-  // seller_verification,..............//.
-  // condition,//.
-  // status,..................//.
-  // mobile_number,//.
-  // description,//.
-  // advertised,.............//.
 
   return (
     <div>
