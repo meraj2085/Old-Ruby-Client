@@ -4,15 +4,17 @@ import EditStatusModal from "../Shared/EditStatusModal/EditStatusModal";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
+  const [toggle, setToggle] = useState(true)
   const [products, setProducts] = useState(null);
+  const [editProduct, setEditProduct] = useState(null);
+
   useEffect(() => {
     fetch(`http://localhost:5000/products?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
       });
-  }, [user]);
-  console.log(products);
+  }, [user, toggle]);
 
   return (
     <div>
@@ -39,6 +41,7 @@ const MyProducts = () => {
                   <td>
                     {product?.status === "available" && (
                       <label
+                        onClick={() => setEditProduct(product?._id)}
                         type="button"
                         htmlFor="ruby-editStatusModal"
                         className={
@@ -77,7 +80,14 @@ const MyProducts = () => {
           </table>
         </div>
       </div>
-      <EditStatusModal></EditStatusModal>
+      {editProduct && (
+        <EditStatusModal
+          editProduct={editProduct}
+          setEditProduct={setEditProduct}
+          setToggle={setToggle}
+          toggle={toggle}
+        ></EditStatusModal>
+      )}
     </div>
   );
 };

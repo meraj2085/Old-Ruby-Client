@@ -1,6 +1,20 @@
 import React from "react";
 
-const EditStatusModal = () => {
+const EditStatusModal = ({ editProduct, setEditProduct, setToggle, toggle }) => {
+  const handleSoldOut = (id) => {
+     fetch(`http://localhost:5000/product/${id}`, {
+          method: "PUT"
+     })
+     .then(res => res.json())
+     .then(data =>{
+          if(data?.modifiedCount){
+               setToggle(!toggle)
+               console.log(data);
+               setEditProduct(null)
+          }
+     })
+  };
+
   return (
     <div>
       <input
@@ -24,12 +38,14 @@ const EditStatusModal = () => {
           </div>
           <div className="py-10 flex justify-evenly">
             <button
+              onClick={() => handleSoldOut(editProduct)}
               type="button"
               className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100"
             >
               Sold out
             </button>
             <button
+              onClick={() => setEditProduct(null)}
               type="button"
               className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100"
             >
