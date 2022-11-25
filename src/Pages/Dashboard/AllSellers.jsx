@@ -10,7 +10,6 @@ const AllSellers = () => {
       });
   }, []);
 
-  console.log(sellers);
   return (
     <div>
       <h1 className="text-3xl font-semibold my-4 mx-5">All sellers</h1>

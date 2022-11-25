@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
+import UserDeleteModal from "../Shared/UserDeleteModal/UserDeleteModal";
 
 const AllBuyers = () => {
   const [buyers, setBuyers] = useState(null);
+  const [toggle, setToggle] = useState(true);
+  const [userId, setUserId] = useState(null);
+
   useEffect(() => {
     fetch("http://localhost:5000/users?role=Buyer")
       .then((res) => res.json())
       .then((data) => {
         setBuyers(data);
       });
-  }, []);
+  }, [toggle]);
+
   return (
     <div>
       <h1 className="text-3xl font-semibold my-4 mx-5">All buyers</h1>
@@ -28,7 +33,13 @@ const AllBuyers = () => {
                   <th>{i + 1}</th>
                   <td>{seller?.email}</td>
                   <td>
-                    <button className="btn btn-xs">Delete</button>
+                    <label
+                      onClick={() => setUserId(seller?.email)}
+                      htmlFor="ruby-userDeleteModal"
+                      className="btn btn-xs"
+                    >
+                      Delete
+                    </label>
                   </td>
                 </tr>
               ))}
@@ -36,6 +47,14 @@ const AllBuyers = () => {
           </table>
         </div>
       </div>
+      {userId && (
+        <UserDeleteModal
+          setUserId={setUserId}
+          userId={userId}
+          toggle={toggle}
+          setToggle={setToggle}
+        ></UserDeleteModal>
+      )}
     </div>
   );
 };
