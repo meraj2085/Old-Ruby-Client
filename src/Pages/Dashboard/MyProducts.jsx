@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import AdvertiseModal from "../Shared/AdvertiseModal/AdvertiseModal";
 import DeleteModal from "../Shared/DeleteModal/DeleteModal";
 import EditStatusModal from "../Shared/EditStatusModal/EditStatusModal";
 
@@ -9,6 +10,7 @@ const MyProducts = () => {
   const [products, setProducts] = useState(null);
   const [editProduct, setEditProduct] = useState(null);
   const [deleteProduct, setDeleteProduct] = useState(null);
+  const [advertiseProduct, setAdvertiseProduct] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:5000/products?email=${user?.email}`)
@@ -75,9 +77,13 @@ const MyProducts = () => {
                   </td>
                   {(product?.status === "available") & !product?.advertised ? (
                     <td>
-                      <button className="btn btn-xs bg-blue-400 border-none">
+                      <label
+                        onClick={() => setAdvertiseProduct(product?._id)}
+                        htmlFor="ruby-advertiseModal"
+                        className="btn btn-xs bg-blue-400 border-none"
+                      >
                         advertise
-                      </button>
+                      </label>
                     </td>
                   ) : (
                     <td></td>
@@ -103,6 +109,14 @@ const MyProducts = () => {
           setToggle={setToggle}
           toggle={toggle}
         ></DeleteModal>
+      )}
+      {advertiseProduct && (
+        <AdvertiseModal
+          advertiseProduct={advertiseProduct}
+          setAdvertiseProduct={setAdvertiseProduct}
+          setToggle={setToggle}
+          toggle={toggle}
+        ></AdvertiseModal>
       )}
     </div>
   );
