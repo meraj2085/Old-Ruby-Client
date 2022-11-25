@@ -1,32 +1,59 @@
 import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { getImageLink } from "../../Api/getImageLink";
 
 const AddAProduct = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+
   const handleAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
+    const name = form.name.value;
+    const image = form.img.files[0]
+    const formData = new FormData()
+    formData.append('image', image)
+    const category = form.category.value;
+    const location = form.location.value;
+    const resell_price = form.resell_price.value;
+    const original_price = form.original_price.value;
+    const years_of_use = form.years_of_use.value;
+    const year_of_purchase = form.year_of_purchase.value;
+    const seller_name = form.seller_name.value;
+    const seller_email = form.seller_email.value;
+    const condition = form.condition.value;
+    const mobile_number = form.mobile_number.value;
+    const description = form.description.value;
+    const postDate = format(new Date(), "PP")
+    const seller_verification = false;
+    const advertised = false;
+    const status = 'available';
+    
+    getImageLink(formData)
+    .then(imgData =>{
+     console.log(imgData.data.display_url);
+    })
   };
 
-  // name,//
-  // img,//
-  // category,//
-  // location, //
-  // postDate,
-  // original_price,//
-  // resell_price,//
-  // years_of_use,//
-  // year_of_purchase,//
-  // seller_name,//
-  // seller_email,//
-  // seller_verification,
-  // condition,//
-  // status,
-  // mobile_number,//
-  // description,//
-  // advertised,
+  // name,//.
+  // img,//......................//.
+  // category,//.
+  // location, //.
+
+  // postDate,.................//look.
+
+  // original_price,//.
+  // resell_price,//.
+  // years_of_use,//.
+  // year_of_purchase,//.
+  // seller_name,//.
+  // seller_email,//.
+  // seller_verification,..............//.
+  // condition,//.
+  // status,..................//.
+  // mobile_number,//.
+  // description,//.
+  // advertised,.............//.
 
   return (
     <div>
@@ -119,7 +146,7 @@ const AddAProduct = () => {
               <input
                 type="text"
                 placeholder="Year of purchase"
-                name="years_of_use"
+                name="year_of_purchase"
                 required
                 className="input input-bordered"
               />

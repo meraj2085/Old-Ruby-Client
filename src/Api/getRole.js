@@ -1,5 +1,5 @@
 export const getRole = async (email) => {
-  const response = await fetch(
+  const res = await fetch(
     `http://localhost:5000/user/${email}`,
     {
       headers: {
@@ -8,7 +8,7 @@ export const getRole = async (email) => {
       },
     }
   );
-  const user = await response.json();
+  const user = await res.json();
   return user?.role;
 };
 
