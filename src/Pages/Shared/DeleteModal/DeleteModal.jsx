@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 const DeleteModal = ({
   setDeleteProduct,
@@ -13,6 +14,7 @@ const DeleteModal = ({
       .then((res) => res.json())
       .then((data) => {
         if (data?.deletedCount) {
+          toast.success("Delete successful", { duration: 2000 });
           setToggle(!toggle);
           setDeleteProduct(null);
         }
