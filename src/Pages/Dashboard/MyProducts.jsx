@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import DeleteModal from "../Shared/DeleteModal/DeleteModal";
 import EditStatusModal from "../Shared/EditStatusModal/EditStatusModal";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
-  const [toggle, setToggle] = useState(true)
+  const [toggle, setToggle] = useState(true);
   const [products, setProducts] = useState(null);
   const [editProduct, setEditProduct] = useState(null);
+  const [deleteProduct, setDeleteProduct] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:5000/products?email=${user?.email}`)
@@ -63,7 +65,13 @@ const MyProducts = () => {
                     )}
                   </td>
                   <td>
-                    <button className="btn btn-xs">Delete</button>
+                    <label
+                      onClick={() => setDeleteProduct(product?._id)}
+                      htmlFor="ruby-deleteModal"
+                      className="btn btn-xs"
+                    >
+                      Delete
+                    </label>
                   </td>
                   {(product?.status === "available") & !product?.advertised ? (
                     <td>
@@ -87,6 +95,14 @@ const MyProducts = () => {
           setToggle={setToggle}
           toggle={toggle}
         ></EditStatusModal>
+      )}
+      {deleteProduct && (
+        <DeleteModal
+          setDeleteProduct={setDeleteProduct}
+          deleteProduct={deleteProduct}
+          setToggle={setToggle}
+          toggle={toggle}
+        ></DeleteModal>
       )}
     </div>
   );
