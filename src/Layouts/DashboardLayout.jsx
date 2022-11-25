@@ -2,25 +2,26 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { getRole } from "../Api/getRole";
 import { AuthContext } from "../Contexts/AuthProvider";
+import AdminMenu from "../Pages/Menu/AdminMenu";
+import BuyerMenu from "../Pages/Menu/BuyerMenu";
+import SellerMenu from "../Pages/Menu/SellerMenu";
 import Footer from "../Pages/Shared/Footer/Footer";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
 import AuthenticationSpinner from "../Pages/Shared/Spinners/AuthenticationSpinner";
 
 const DashboardLayout = () => {
-  const {user, role, setRole} = useContext(AuthContext)
-  const [loading, setLoading] = useState(true)
+  const { user, role, setRole } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true)
-    getRole(user?.email)
-    .then(data => {
-      setRole(data)
-      setLoading(false)
-    })
-  }, [user, setRole])
+    setLoading(true);
+    getRole(user?.email).then((data) => {
+      setRole(data);
+      setLoading(false);
+    });
+  }, [user, setRole]);
 
   console.log(role);
-
 
   return (
     <>
@@ -36,24 +37,9 @@ const DashboardLayout = () => {
             <li>
               <Link to="/dashboard">Home</Link>
             </li>
-            <li>
-              <Link to="/dashboard/myOrders">My orders</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/allBuyers">All buyers</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/addAProduct">Add a product</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/myProducts">My products</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/allSellers">All Sellers</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/reportedItems">Reported Items</Link>
-            </li>
+            {role === "Buyer" && <BuyerMenu></BuyerMenu>}
+            {role === "Seller" && <SellerMenu></SellerMenu>}
+            {role === "Admin" && <AdminMenu></AdminMenu>}
           </ul>
         </div>
       </div>
