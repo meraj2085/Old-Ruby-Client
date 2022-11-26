@@ -7,7 +7,6 @@ import BuyerMenu from "../Pages/Menu/BuyerMenu";
 import SellerMenu from "../Pages/Menu/SellerMenu";
 import Footer from "../Pages/Shared/Footer/Footer";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
-import AuthenticationSpinner from "../Pages/Shared/Spinners/AuthenticationSpinner";
 
 const DashboardLayout = () => {
   const { user, role, setRole } = useContext(AuthContext);
@@ -32,7 +31,7 @@ const DashboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="ruby-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-52 md:w-80 bg-base-100 md:bg-transparent text-base-content">
-            <li className="rounded-md bg-red-600 hover:bg-red-700 text-white mb-3">
+            <li className="rounded-md bg-slate-200 hover:bg-slate-100 mb-3">
               <Link to="/dashboard">Dashboard</Link>
             </li>
             {role === "Buyer" && <BuyerMenu></BuyerMenu>}
