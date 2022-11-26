@@ -10,7 +10,12 @@ const MyOrders = () => {
   const [deleteOrder, setDeleteOrder] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/booked?email=${user?.email}`)
+    fetch(`http://localhost:5000/booked?email=${user?.email}`, {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [user?.email, toggle]);
