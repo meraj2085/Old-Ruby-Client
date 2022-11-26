@@ -1,4 +1,3 @@
-import { itMatchesOne } from "daisyui/src/lib/postcss-prefixer/utils";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
@@ -58,16 +57,30 @@ const MyOrders = () => {
                   </td>
                   <td>
                     {order?.payment && (
-                      <button className="px-6 py-1 font-semibold border rounded hover:border-green-500 text-green-500">
+                      <button className="px-9 py-1 font-semibold border rounded hover:border-green-500 text-green-500">
                         Paid
                       </button>
                     )}
-                    {!order?.payment && (
-                      <Link to={`/dashboard/payment/${order?._id}`}>
-                        <button className="px-6 py-1 font-semibold border rounded hover:border-blue-500 text-blue-500">
-                          Pay
-                        </button>
-                      </Link>
+                    {order?.status === "available" ? (
+                      <>
+                        {!order?.payment && (
+                          <Link to={`/dashboard/payment/${order?._id}`}>
+                            <button className="px-10 py-1 font-semibold border rounded">
+                              Pay
+                            </button>
+                          </Link>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {order?.payment === true ? (
+                          ""
+                        ) : (
+                          <button className="px-5 py-1 font-semibold border rounded hover:border-blue-500 text-blue-500">
+                            Sold out
+                          </button>
+                        )}
+                      </>
                     )}
                   </td>
                 </tr>
