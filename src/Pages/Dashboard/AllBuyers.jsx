@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
 
 const AllBuyers = () => {
-  const [buyers, setBuyers] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/users?role=Buyer", {
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('OldRuby-Token')}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setBuyers(data);
+  const { data: buyers } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/users?role=Buyer", {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,
+        },
       });
-  }, []);
+      const data = await res.json();
+      return data;
+    },
+  });
 
   return (
     <div>
