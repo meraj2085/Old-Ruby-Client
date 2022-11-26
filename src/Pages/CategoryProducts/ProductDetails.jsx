@@ -5,7 +5,7 @@ import BookingModal from "../Shared/BookingModal/BookingModal";
 
 const ProductDetails = () => {
   const { state: product } = useLocation();
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setProduct] = useState(null);
   const {
     condition,
     description,
@@ -74,7 +74,7 @@ const ProductDetails = () => {
             <p>{description}</p>
             <div className="card-actions justify-center mt-3">
               <label
-                onClick={() => setSelectedProduct(product)}
+                onClick={() => setProduct(product)}
                 htmlFor="ruby-booking-modal"
                 className="px-5 py-2 font-semibold border rounded border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100"
               >
@@ -87,7 +87,7 @@ const ProductDetails = () => {
       {selectedProduct && (
         <BookingModal
           product={product}
-          setProduct={selectedProduct}
+          setProduct={setProduct}
         ></BookingModal>
       )}
     </div>
