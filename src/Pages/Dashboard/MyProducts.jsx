@@ -13,7 +13,12 @@ const MyProducts = () => {
   const [advertiseProduct, setAdvertiseProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products?email=${user?.email}`)
+    fetch(`http://localhost:5000/products?email=${user?.email}`, {
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('OldRuby-Token')}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

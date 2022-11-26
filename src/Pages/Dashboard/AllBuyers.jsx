@@ -4,7 +4,12 @@ const AllBuyers = () => {
   const [buyers, setBuyers] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users?role=Buyer")
+    fetch("http://localhost:5000/users?role=Buyer", {
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('OldRuby-Token')}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setBuyers(data);

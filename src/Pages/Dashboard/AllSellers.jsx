@@ -4,7 +4,12 @@ const AllSellers = () => {
   const [sellers, setSellers] = useState(null);
   const [toggle, setToggle] = useState(true)
   useEffect(() => {
-    fetch("http://localhost:5000/users?role=Seller")
+    fetch("http://localhost:5000/users?role=Seller", {
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('OldRuby-Token')}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setSellers(data);

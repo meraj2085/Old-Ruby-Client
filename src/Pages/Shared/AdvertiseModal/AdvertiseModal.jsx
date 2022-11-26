@@ -10,6 +10,10 @@ const AdvertiseModal = ({
   const handleAdvertise = (id) => {
     fetch(`http://localhost:5000/product/update/${id}`, {
       method: "PUT",
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('OldRuby-Token')}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
