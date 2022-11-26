@@ -1,10 +1,10 @@
 import React from "react";
+import dashboard from "../../Assets/dashboard.svg";
 
 const WelcomePage = () => {
   return (
     <div>
-      <div className="flex justify-between my-4 md:mx-5 mx-8">
-        <h1 className="text-3xl font-semibold">Welcome page</h1>
+      <div className="flex justify-end my-0 sm:my-5 mx-8">
         <label htmlFor="ruby-drawer" className="drawer-button lg:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -22,6 +22,25 @@ const WelcomePage = () => {
           </svg>
         </label>
       </div>
+      <section className="px-5">
+        <div className="flex flex-col justify-center sm:py-12 lg:py-16 lg:flex-row lg:justify-between">
+          <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md lg:text-left">
+            <h1 className="text-5xl font-bold sm:text-6xl">Dashboard</h1>
+            <p className="mt-6 text-lg">
+              Your dashboard is here, {' '}
+              <br className="hidden md:inline lg:hidden" />
+              Reload the page if you can's sell the options.
+            </p>
+          </div>
+          <div>
+            <img
+              src={dashboard}
+              alt=""
+              className="object-contain md:h-96 h-80"
+            />
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
