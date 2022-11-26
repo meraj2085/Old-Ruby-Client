@@ -16,7 +16,6 @@ const MyOrders = () => {
       .then((data) => setOrders(data));
   }, [user?.email, toggle]);
 
-  console.log(orders);
   return (
     <div>
       <h1 className="text-3xl font-semibold my-4 mx-5">My products</h1>
@@ -35,7 +34,7 @@ const MyOrders = () => {
             </thead>
             <tbody>
               {orders?.map((order, i) => (
-                <tr>
+                <tr key={order?._id}>
                   <th>{i + 1}</th>
                   <td>
                     <div className="avatar">
