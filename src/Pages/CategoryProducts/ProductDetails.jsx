@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import badge from "../../Assets/verified-badge.png";
 import BookingModal from "../Shared/BookingModal/BookingModal";
 
 const ProductDetails = () => {
-  const { state: product } = useLocation();
+  const product = useLoaderData();
   const [selectedProduct, setProduct] = useState(null);
   const {
     condition,

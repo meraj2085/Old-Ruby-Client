@@ -1,8 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import badge from "../../Assets/verified-badge.png";
 
-const ProductCard = ({ product, setProduct, reportedItem, setReportedItem }) => {
+const ProductCard = ({
+  product,
+  setProduct,
+  reportedItem,
+  setReportedItem,
+}) => {
   const {
     name,
     img,
@@ -11,8 +16,8 @@ const ProductCard = ({ product, setProduct, reportedItem, setReportedItem }) => 
     seller_verification,
     description,
     location,
+    _id
   } = product;
-  const navigate = useNavigate();
 
   return (
     <div className="card bg-base-100 shadow-xl">
@@ -23,7 +28,10 @@ const ProductCard = ({ product, setProduct, reportedItem, setReportedItem }) => 
         <div className="flex justify-between">
           <h2 className="card-title">{name}</h2>
           <div>
-            <label onClick={()=>setReportedItem(product?._id)} htmlFor="ruby-reportModal">
+            <label
+              onClick={() => setReportedItem(product?._id)}
+              htmlFor="ruby-reportModal"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -60,13 +68,14 @@ const ProductCard = ({ product, setProduct, reportedItem, setReportedItem }) => 
           >
             Book Now
           </label>
-          <button
-            onClick={() => navigate("/productDetails", { state: product })}
-            type="button"
-            className="px-5 py-2 font-semibold border rounded border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100"
-          >
-            View Details
-          </button>
+          <Link to={`/product/${_id}`}>
+            <button
+              type="button"
+              className="px-5 py-2 font-semibold border rounded border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100"
+            >
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>
