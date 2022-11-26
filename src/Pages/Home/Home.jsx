@@ -38,7 +38,7 @@ const Home = () => {
         </div>
       </div>
       <Catagories></Catagories>
-      {advertisedProduct && <Advertise advertisedProduct={advertisedProduct}></Advertise>}
+      {advertisedProduct?.length > 0 && <Advertise advertisedProduct={advertisedProduct}></Advertise>}
     </div>
   );
 };

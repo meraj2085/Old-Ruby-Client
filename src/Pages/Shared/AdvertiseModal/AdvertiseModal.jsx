@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 const AdvertiseModal = ({
   setAdvertiseProduct,
@@ -13,6 +14,7 @@ const AdvertiseModal = ({
       .then((res) => res.json())
       .then((data) => {
         if (data?.modifiedCount) {
+          toast.success('Advertise successful', {duration: 3000})
           setToggle(!toggle);
           setAdvertiseProduct(null);
         }
