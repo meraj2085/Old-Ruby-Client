@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const CheckoutForm = ({ booking }) => {
-  console.log(booking);
   const [cardError, setCardError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const [processing, setProcession] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const { item_price, buyer_name, buyer_email, _id, product_id } = booking;
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -34,7 +34,7 @@ const CheckoutForm = ({ booking }) => {
     if (card == null) {
       return;
     }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -42,10 +42,8 @@ const CheckoutForm = ({ booking }) => {
       setCardError(error.message);
     } else {
       setCardError("");
-      console.log("[PaymentMethod]", paymentMethod);
     }
-    setSuccess("");
-    setProcession(true);
+    setProcessing(true);
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -58,7 +56,7 @@ const CheckoutForm = ({ booking }) => {
       });
     if (confirmError) {
       setCardError(confirmError.message);
-      setProcession(false);
+      setProcessing(false);
       return;
     }
     if (paymentIntent.status === "succeeded") {
@@ -78,16 +76,21 @@ const CheckoutForm = ({ booking }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          navigate("/dashboard/myOrders");
+          console.log(data.updateResult);
+          toast.success("Payment successful", { duration: 4000 });
         });
     }
-    setProcession(false);
+    setProcessing(false);
     console.log("Payment", paymentIntent);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        className="border rounded max-w-lg border-gray-800 px-5 py-4"
+        onSubmit={handleSubmit}
+      >
         <CardElement
           options={{
             style: {
@@ -104,25 +107,19 @@ const CheckoutForm = ({ booking }) => {
             },
           }}
         />
-        <button
-          type="submit"
-          className="btn btn-sm text-white px-10 mt-4"
-          disabled={!stripe || processing || !clientSecret}
-        >
-          Pay
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="btn btn-sm text-white px-10 mt-4"
+            disabled={!stripe || processing || !clientSecret}
+          >
+            Pay
+          </button>
+        </div>
       </form>
       <div>
         {cardError && (
           <p className="text-red-500 text-sm">{cardError}. Please try again.</p>
-        )}
-        {success && (
-          <div>
-            <p className="text-green-500 text-lg">{success}</p>{" "}
-            <p className="text-sm">
-              Your transactionId: <span> {transactionId}</span>
-            </p>
-          </div>
         )}
       </div>
     </div>

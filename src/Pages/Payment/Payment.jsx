@@ -13,7 +13,7 @@ const Payment = () => {
       <p className="mx-5 text-lg">
         Pay ${booking?.item_price} for {booking?.item_name}
       </p>
-      <div className="w-96 mx-5 my-10">
+      <div className=" mx-5 my-10">
         <Elements stripe={stripePromise}>
           <CheckoutForm booking={booking} />
         </Elements>
