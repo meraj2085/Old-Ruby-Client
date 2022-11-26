@@ -29,7 +29,7 @@ const WelcomePage = () => {
             <p className="mt-6 text-lg">
               Your dashboard is here, {' '}
               <br className="hidden md:inline lg:hidden" />
-              Reload the page if you can's sell the options.
+              Reload the page if you can's see the options.
             </p>
           </div>
           <div>

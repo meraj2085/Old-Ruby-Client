@@ -37,7 +37,7 @@ const DashboardLayout = () => {
           <label htmlFor="ruby-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-52 md:w-80 bg-base-100 md:bg-transparent text-base-content">
             <li>
-              <Link to="/dashboard">Home</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             {role === "Buyer" && <BuyerMenu></BuyerMenu>}
             {role === "Seller" && <SellerMenu></SellerMenu>}
