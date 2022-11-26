@@ -4,7 +4,7 @@ import SignInImg from "../../Assets/sign-in.svg";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Contexts/AuthProvider";
-import { getToken, token } from "../../Api/getToken";
+import { getTokenForGmailLogin, token } from "../../Api/getToken";
 import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const SignIn = () => {
@@ -24,9 +24,10 @@ const SignIn = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        token(user);
+        getTokenForGmailLogin(user);
         setLoading(false);
         navigate(from, { replace: true })
+        toast.success('User sign in successful', {duration: 3000})
       })
       .catch((err) => {
         console.error(err.message);

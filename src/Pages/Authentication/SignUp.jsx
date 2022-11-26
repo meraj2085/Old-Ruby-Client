@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterImg from "../../Assets/Sign-up.svg";
 import toast from 'react-hot-toast';
 import { AuthContext } from "../../Contexts/AuthProvider";
-import { getToken, token } from "../../Api/getToken";
+import { getToken, getTokenForGmailLogin } from "../../Api/getToken";
 import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const SignUp = () => {
@@ -47,7 +47,8 @@ const SignUp = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        token(user);
+        getTokenForGmailLogin(user);
+        toast.success('User sign in successful', {duration: 3000})
         navigate(from, { replace: true })
       })
       .catch((err) => {
