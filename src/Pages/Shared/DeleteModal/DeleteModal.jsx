@@ -13,11 +13,10 @@ const DeleteModal = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data?.deletedCount) {
-          toast.success("Delete successful", { duration: 2000 });
-          setToggle(!toggle);
-          setDeleteProduct(null);
-        }
+        toast.success("Delete successful", { duration: 2000 });
+        console.log(data);
+        setDeleteProduct(null);
+        setToggle(!toggle);
       });
   };
 
