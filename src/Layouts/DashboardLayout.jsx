@@ -7,6 +7,7 @@ import BuyerMenu from "../Pages/Menu/BuyerMenu";
 import SellerMenu from "../Pages/Menu/SellerMenu";
 import Footer from "../Pages/Shared/Footer/Footer";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
+import AuthenticationSpinner from "../Pages/Shared/Spinners/AuthenticationSpinner";
 
 const DashboardLayout = () => {
   const { user, role, setRole } = useContext(AuthContext);
@@ -20,6 +21,10 @@ const DashboardLayout = () => {
     });
   }, [user, setRole]);
 
+  if (loading) {
+    return <AuthenticationSpinner></AuthenticationSpinner>;
+  }
+
   return (
     <>
       <Navbar></Navbar>
@@ -30,7 +35,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="ruby-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 text-base-content">
+          <ul className="menu p-4 w-80 sm:bg-base-100 md:bg-transparent text-base-content">
             <li>
               <Link to="/dashboard">Home</Link>
             </li>
