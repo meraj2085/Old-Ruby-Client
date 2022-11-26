@@ -44,8 +44,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="flex">
-            <Link to="/" className="flex items-center px-4 hover:text-red-700">
-              Link
+            <Link to="/blog" className="flex items-center px-4 hover:text-red-700">
+              Blog
             </Link>
           </li>
           <li className="flex">
