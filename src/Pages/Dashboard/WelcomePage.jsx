@@ -3,8 +3,8 @@ import React from "react";
 const WelcomePage = () => {
   return (
     <div>
-      <div className="flex justify-between mx-5 my-5">
-        <h1>I am welcome page</h1>
+      <div className="flex justify-between my-4 md:mx-5 mx-8">
+        <h1 className="text-3xl font-semibold">Welcome page</h1>
         <label htmlFor="ruby-drawer" className="drawer-button lg:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@ const WelcomePage = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-8 h-8"
           >
             <path
               strokeLinecap="round"

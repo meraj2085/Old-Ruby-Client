@@ -17,7 +17,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className="px-16 py-3 bg-gray-100 text-gray-800">
+    <header className="md:px-16 px-5 py-3 bg-gray-100 text-gray-800 align-middle">
       <div className="container flex justify-between mx-auto">
         <div>
           <Link
@@ -26,7 +26,7 @@ const Navbar = () => {
             title="Company"
             className="inline-flex items-center"
           >
-            <img className="w-[50px]" src={logo} alt="" />
+            <img className="md:w-[50px] w-[40px]" src={logo} alt="" />
             <span className="ml-2 text-2xl font-semibold text-gray-800">
               Old <span className="text-red-700">R</span>uby
             </span>

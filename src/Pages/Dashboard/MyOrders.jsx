@@ -17,7 +17,25 @@ const MyOrders = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold my-4 mx-5">My products</h1>
+      <div className="flex justify-between my-4 md:mx-5 mx-8">
+        <h1 className="text-3xl font-semibold">My orders</h1>
+        <label htmlFor="ruby-drawer" className="drawer-button lg:hidden">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-8 h-8"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5"
+            />
+          </svg>
+        </label>
+      </div>
       <div className="mx-5 shadow-md rounded-lg">
         <div className="overflow-x-auto">
           <table className="table w-full">
