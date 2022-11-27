@@ -1,16 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import { format } from "date-fns";
 import { getImageLink } from "../../Api/getImageLink";
 import { addProduct } from "../../Api/addProduct";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const AddAProduct = () => {
+  const [spinner , setSpinner] = useState(false)
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleAddProduct = (event) => {
+    setSpinner(true)
     event.preventDefault();
     const form = event.target;
     let categoryId = null;
@@ -74,7 +77,11 @@ const AddAProduct = () => {
             if (data?.insertedId) {
               toast.success("Product added successfully.", { duration: 3000 });
               navigate("/dashboard/myProducts");
+              setSpinner(false)
             }
+          }).catch(err =>{
+            setSpinner(false)
+            console.log(err);
           });
         });
     });
@@ -281,7 +288,7 @@ const AddAProduct = () => {
               type="submit"
               className="btn bg-red-700 hover:bg-red-600 border-none"
             >
-              Add product
+              {spinner ? <AuthenticationSpinner/> : 'Add product'}
             </button>
           </div>
         </form>
