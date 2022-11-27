@@ -47,7 +47,7 @@ const AddAProduct = () => {
     const reported = false;
     getImageLink(formData).then((imgData) => {
       const img = imgData.data.display_url;
-      fetch(`http://localhost:5000/verification/habiba@gmail.com`)
+      fetch(`http://localhost:5000/verification/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
           const seller_verification = data;
