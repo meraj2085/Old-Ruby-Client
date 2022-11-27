@@ -9,7 +9,8 @@ import Footer from "../Pages/Shared/Footer/Footer";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
 
 const DashboardLayout = () => {
-  const { user, role, setRole } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,9 +35,19 @@ const DashboardLayout = () => {
             <li className="rounded-md bg-slate-200 hover:bg-slate-100 mb-3">
               <Link to="/dashboard">Dashboard</Link>
             </li>
-            {role === "Buyer" && <BuyerMenu></BuyerMenu>}
-            {role === "Seller" && <SellerMenu></SellerMenu>}
-            {role === "Admin" && <AdminMenu></AdminMenu>}
+            {loading ? (
+              <>
+                <li className="rounded-md bg-slate-200 hover:bg-slate-100 mb-3">
+                  <p>Loading...</p>
+                </li>
+              </>
+            ) : (
+              <>
+                {role === "Buyer" && <BuyerMenu></BuyerMenu>}
+                {role === "Seller" && <SellerMenu></SellerMenu>}
+                {role === "Admin" && <AdminMenu></AdminMenu>}
+              </>
+            )}
           </ul>
         </div>
       </div>
