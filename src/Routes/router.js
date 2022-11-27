@@ -40,8 +40,8 @@ export const router = createBrowserRouter([
         element: <Blog></Blog>
       },
       {
-        path: "/category/:categoryName",
-        loader: ({ params }) =>fetch(`http://localhost:5000/category/${params.categoryName}`),
+        path: "/category/:id",
+        loader: ({ params }) =>fetch(`http://localhost:5000/category/${params.id}`),
         element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
       },
       {

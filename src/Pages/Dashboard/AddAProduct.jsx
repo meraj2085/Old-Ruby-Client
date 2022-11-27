@@ -13,11 +13,21 @@ const AddAProduct = () => {
   const handleAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
+    let categoryId = null;
     const name = form.name.value;
     const image = form.img.files[0];
     const formData = new FormData();
     formData.append("image", image);
     const category = form.category.value;
+    if(category === 'iphone'){
+      categoryId = '637f0b58bba2041a41f73dfd'
+    }else if(category === 'samsung'){
+      categoryId = '637f0b58bba2041a41f73dfe'
+    }else if(category === 'xiaomi'){
+      categoryId = '637f0b58bba2041a41f73dff'
+    }else{
+      categoryId = '637f0b58bba2041a41f73e00'
+    }
     const location = form.location.value;
     const resell_price = form.resell_price.value;
     const original_price = form.original_price.value;
@@ -57,6 +67,7 @@ const AddAProduct = () => {
             description,
             advertised,
             reported,
+            categoryId,
           };
 
           addProduct(product).then((data) => {
