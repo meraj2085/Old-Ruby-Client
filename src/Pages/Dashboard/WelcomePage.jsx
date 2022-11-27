@@ -22,7 +22,7 @@ const WelcomePage = () => {
           </svg>
         </label>
       </div>
-      <section className="px-5">
+      <section className="md:px-20 px-5">
         <div className="flex flex-col justify-center sm:py-12 lg:py-16 lg:flex-row lg:justify-between">
           <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md lg:text-left">
             <h1 className="text-5xl font-bold sm:text-6xl">Dashboard</h1>
