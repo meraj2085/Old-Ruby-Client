@@ -151,6 +151,25 @@ const Navbar = () => {
                       Blog
                     </Link>
                   </li>
+                  <div>
+                  {user?.uid ? (
+                    <>
+                      <li onClick={handleLogOut}>
+                        <button className="flex items-center px-4 hover:text-red-700">
+                          Logout
+                        </button>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/signIn">
+                        <button className="flex items-center px-4 hover:text-red-700">
+                          Sign in
+                        </button>
+                      </Link>
+                    </>
+                  )}
+                </div>
                 </ul>
               </nav>
             </div>
