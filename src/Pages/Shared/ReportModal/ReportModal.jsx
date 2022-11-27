@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
+import AuthenticationSpinner from "../Spinners/AuthenticationSpinner";
 
 const ReportModal = ({ reportedItem, setReportedItem }) => {
+  const [loading, setLoading] = useState(false);
   const handleReport = (id) => {
+    setLoading(true);
     fetch(`http://localhost:5000/product/report/${id}`, {
       method: "PUT",
     })
@@ -11,6 +14,7 @@ const ReportModal = ({ reportedItem, setReportedItem }) => {
         if (data?.acknowledged) {
           toast.success("Reported done", { duration: 2000 });
           setReportedItem(null);
+          setLoading(false);
         }
       });
   };
@@ -35,14 +39,17 @@ const ReportModal = ({ reportedItem, setReportedItem }) => {
               type="button"
               className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100"
             >
-              Report
+              {loading ? (
+                <AuthenticationSpinner></AuthenticationSpinner>
+              ) : (
+                "Report"
+              )}
             </button>
             <button
               onClick={() => setReportedItem(null)}
               type="button"
               className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100"
-            >
-              Cancel
+            >Cancel
             </button>
           </div>
         </div>

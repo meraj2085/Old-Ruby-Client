@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
+import AuthenticationSpinner from "../Spinners/AuthenticationSpinner";
 
 const BookingCancelModal = ({
   toggle,
@@ -7,7 +8,9 @@ const BookingCancelModal = ({
   deleteOrder,
   setDeleteOrder,
 }) => {
+  const [loading, setLoading] = useState(false)
   const handleDelete = (id) => {
+    setLoading(true)
     fetch(`http://localhost:5000/booking/${id}`, {
      method: 'DELETE'
     })
@@ -17,6 +20,7 @@ const BookingCancelModal = ({
           setToggle(!toggle);
           toast.success('Product booking cancelled', {duration: 2000})
           setDeleteOrder(null)
+          setLoading(false)
      }
     })
   };
@@ -45,7 +49,7 @@ const BookingCancelModal = ({
               type="button"
               className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100"
             >
-              Yes
+              {loading ? <AuthenticationSpinner/> : 'Yes'}
             </button>
             <button
               onClick={() => setDeleteOrder(null)}
