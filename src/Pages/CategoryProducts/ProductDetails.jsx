@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import badge from "../../Assets/verified-badge.png";
 import BookingModal from "../Shared/BookingModal/BookingModal";
+import ReportModal from "../Shared/ReportModal/ReportModal";
 
 const ProductDetails = () => {
+  const [reportedItem, setReportedItem] = useState(null);
   const product = useLoaderData();
   const [selectedProduct, setProduct] = useState(null);
   const {
@@ -35,21 +37,26 @@ const ProductDetails = () => {
             <div className="flex justify-between">
               <h2 className="card-title">{name}</h2>
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 text-red-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-                  />
-                </svg>
-              </div>
+            <label
+              onClick={() => setReportedItem(product?._id)}
+              htmlFor="ruby-reportModal"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-red-500"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                />
+              </svg>
+            </label>
+          </div>
             </div>
             <div className="flex">
               <div className="text-lg">Seller: {seller_name}</div>
@@ -89,6 +96,12 @@ const ProductDetails = () => {
           product={product}
           setProduct={setProduct}
         ></BookingModal>
+      )}
+      {reportedItem && (
+        <ReportModal
+          reportedItem={reportedItem}
+          setReportedItem={setReportedItem}
+        ></ReportModal>
       )}
     </div>
   );

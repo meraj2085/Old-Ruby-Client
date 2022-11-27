@@ -1,6 +1,6 @@
 ## Project Details
 
-### `Client live link:` .
+### `Client live link:` https://oldruby-91650.web.app
 ### `Server live link:` https://oldruby-server.vercel.app/
 
 
