@@ -16,7 +16,10 @@ import WelcomePage from "../Pages/Dashboard/WelcomePage";
 import Home from "../Pages/Home/Home";
 import Payment from "../Pages/Payment/Payment";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
+import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
 import PrivateRoute from "./PrivateRoute";
+import SellerRoute from "./SellerRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -66,31 +69,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/myOrders",
-        element: <MyOrders></MyOrders>,
+        element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>,
       },
       {
         path: "/dashboard/allBuyers",
-        element: <AllBuyers></AllBuyers>,
+        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>,
       },
       {
         path: "/dashboard/addAProduct",
-        element: <AddAProduct></AddAProduct>,
+        element: <SellerRoute><AddAProduct></AddAProduct></SellerRoute>,
       },
       {
         path: "/dashboard/reportedItems",
-        element: <ReportedItems></ReportedItems>,
+        element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>,
       },
       {
         path: "/dashboard/allSellers",
-        element: <AllSellers></AllSellers>,
-      },
-      {
-        path: "/dashboard/allSellers",
-        element: <AllSellers></AllSellers>,
+        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>,
       },
       {
         path: "/dashboard/myProducts",
-        element: <MyProducts></MyProducts>,
+        element: <SellerRoute><MyProducts></MyProducts></SellerRoute>,
       },
       {
         path: '/dashboard/payment/:id',
