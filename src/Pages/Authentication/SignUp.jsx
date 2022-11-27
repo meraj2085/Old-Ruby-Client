@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterImg from "../../Assets/Sign-up.svg";
@@ -8,6 +8,7 @@ import { getToken, getTokenForGmailLogin } from "../../Api/getToken";
 import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const SignUp = () => {
+  const [error, setError] = useState(null);
   const {
     createUser,
     updateUserProfile,
@@ -31,14 +32,17 @@ const SignUp = () => {
         toast.success('User create successful', {duration: 3000})
         setLoading(false);
         navigate(from, { replace: true });
+        setError(null)
       })
       .catch(err =>{
         console.error(err.message);
+        setError(err.message)
         setLoading(false)
       })
     })
     .catch(err =>{
       console.error(err.message);
+      setError(err.message)
       setLoading(false)
     })
   };
@@ -50,9 +54,11 @@ const SignUp = () => {
         getTokenForGmailLogin(user);
         toast.success('User sign in successful', {duration: 3000})
         navigate(from, { replace: true })
+        setError(null)
       })
       .catch((err) => {
         console.error(err.message);
+        setError(err.message)
         setLoading(false)
       });
   };
@@ -118,6 +124,17 @@ const SignUp = () => {
                 <option>Seller</option>
               </select>
             </div>
+            <div className="text-red-500">
+            <p>
+              {error === "Firebase: Error (auth/email-already-in-use)." &&
+                "Email already in use"}
+            </p>
+            <p>
+              {error ===
+                "Firebase: Password should be at least 6 characters (auth/weak-password)." &&
+                "Password must be atleast 6 characters long."}
+            </p>
+          </div>
             <button
                 type="submit"
                 className="btn bg-red-700 hover:bg-red-600 border-none"

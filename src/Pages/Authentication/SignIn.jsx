@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SignInImg from "../../Assets/sign-in.svg";
 import toast from "react-hot-toast";
@@ -8,6 +8,7 @@ import { getTokenForGmailLogin, token } from "../../Api/getToken";
 import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const SignIn = () => {
+  const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
@@ -26,11 +27,13 @@ const SignIn = () => {
         const user = result.user;
         getTokenForGmailLogin(user);
         setLoading(false);
-        navigate(from, { replace: true })
-        toast.success('User sign in successful', {duration: 3000})
+        navigate(from, { replace: true });
+        toast.success("User sign in successful", { duration: 3000 });
+        setError(null)
       })
       .catch((err) => {
         console.error(err.message);
+        setError(err.message)
         setLoading(false);
       });
   };
@@ -41,10 +44,12 @@ const SignIn = () => {
         const user = result.user;
         token(user);
         setLoading(false);
-        navigate(from, { replace: true })
+        navigate(from, { replace: true });
+        setError(null)
       })
       .catch((err) => {
         console.error(err.message);
+        setError(err.message)
         setLoading(false);
       });
   };
@@ -83,6 +88,16 @@ const SignIn = () => {
                 placeholder="Your password"
                 className="input input-bordered"
               />
+            </div>
+            <div className="text-red-600">
+              <p>
+                {error === "Firebase: Error (auth/user-not-found)." &&
+                  "User Not Found"}
+              </p>
+              <p>
+                {error === "Firebase: Error (auth/wrong-password)." &&
+                  "Wrong password"}
+              </p>
             </div>
             <div className="form-control mt-6">
               <button
