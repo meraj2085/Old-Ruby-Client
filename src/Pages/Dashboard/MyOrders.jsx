@@ -41,7 +41,7 @@ const MyOrders = () => {
           </svg>
         </label>
       </div>
-      <div className="mx-5 shadow-md rounded-lg">
+      <div className="mx-5 shadow-md rounded-lg mb-10">
         <div className="overflow-x-auto">
           <table className="table w-full">
             <thead>
