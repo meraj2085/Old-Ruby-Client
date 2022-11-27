@@ -3,6 +3,7 @@ import sellingImg from "../../Assets/home-img.svg";
 import Advertise from "../Advertise/Advertise";
 import Catagories from "../Catagories/Catagories";
 import axios from "axios";
+import Reviews from "../Reviews/Reviews";
 
 const Home = () => {
   const [advertisedProduct, setAdvertisedProduct] = useState(null);
@@ -57,6 +58,7 @@ const Home = () => {
       {advertisedProduct?.length > 0 && (
         <Advertise advertisedProduct={advertisedProduct}></Advertise>
       )}
+      <Reviews></Reviews>
     </div>
   );
 };
