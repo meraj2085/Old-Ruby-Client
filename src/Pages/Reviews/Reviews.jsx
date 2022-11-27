@@ -15,7 +15,7 @@ const Reviews = () => {
           <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-6 mx-16 mb-20 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-5 md:mx-16 mb-20 mt-10">
         <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800">
           <div className="flex justify-between p-4">
             <div className="flex space-x-4">

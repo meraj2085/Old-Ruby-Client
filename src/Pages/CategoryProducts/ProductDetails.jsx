@@ -26,7 +26,7 @@ const ProductDetails = () => {
   } = product;
   return (
     <div>
-      <div className="flex justify-center my-20">
+      <div className="flex justify-center my-20 mx-5">
         <div className="card bg-base-100 w-96 shadow-xl">
           <figure>
             <img src={img} alt="Shoes" />

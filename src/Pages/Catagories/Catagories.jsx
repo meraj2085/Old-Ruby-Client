@@ -25,7 +25,7 @@ const Catagories = () => {
           <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-20 gap-10 mx-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-20 gap-10 md:mx-16 mx-5">
         {categories?.map((category) => (
           <CategoryCard key={category._id} category={category}></CategoryCard>
         ))}
