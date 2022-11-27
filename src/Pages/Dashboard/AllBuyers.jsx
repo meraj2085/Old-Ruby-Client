@@ -5,12 +5,15 @@ const AllBuyers = () => {
   const { data: buyers } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users?role=Buyer", {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,
-        },
-      });
+      const res = await fetch(
+        "https://oldruby-server.vercel.app/users?role=Buyer",
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },

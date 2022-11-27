@@ -39,25 +39,39 @@ export const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
       {
-        path: '/blog',
-        element: <Blog></Blog>
+        path: "/blog",
+        element: <Blog></Blog>,
       },
       {
         path: "/category/:id",
-        loader: ({ params }) =>fetch(`http://localhost:5000/category/${params.id}`),
-        element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
+        loader: ({ params }) =>
+          fetch(`https://oldruby-server.vercel.app/category/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <CategoryProducts></CategoryProducts>
+          </PrivateRoute>
+        ),
       },
       {
-        path: '/product/:id',
-        loader: ({params})=>fetch(`http://localhost:5000/product/${params.id}`),
-        element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
-      }
+        path: "/product/:id",
+        loader: ({ params }) =>
+          fetch(`https://oldruby-server.vercel.app/product/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
     path: "/dashboard",
     errorElement: <ErrorPage></ErrorPage>,
-    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",
@@ -65,33 +79,62 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/myOrders",
-        element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>,
+        element: (
+          <BuyerRoute>
+            <MyOrders></MyOrders>
+          </BuyerRoute>
+        ),
       },
       {
         path: "/dashboard/allBuyers",
-        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/addAProduct",
-        element: <SellerRoute><AddAProduct></AddAProduct></SellerRoute>,
+        element: (
+          <SellerRoute>
+            <AddAProduct></AddAProduct>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/reportedItems",
-        element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <ReportedItems></ReportedItems>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allSellers",
-        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/myProducts",
-        element: <SellerRoute><MyProducts></MyProducts></SellerRoute>,
+        element: (
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
       },
       {
-        path: '/dashboard/payment/:id',
-        loader: ({params})=>fetch(`http://localhost:5000/booked/${params.id}`),
-        element: <BuyerRoute><Payment></Payment></BuyerRoute>
-      }
+        path: "/dashboard/payment/:id",
+        loader: ({ params }) =>
+          fetch(`https://oldruby-server.vercel.app/booked/${params.id}`),
+        element: (
+          <BuyerRoute>
+            <Payment></Payment>
+          </BuyerRoute>
+        ),
+      },
     ],
   },
 ]);

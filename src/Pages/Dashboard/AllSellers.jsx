@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 
 const AllSellers = () => {
   const [sellers, setSellers] = useState(null);
-  const [toggle, setToggle] = useState(true)
+  const [toggle, setToggle] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/users?role=Seller", {
+    fetch("https://oldruby-server.vercel.app/users?role=Seller", {
       headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('OldRuby-Token')}`,
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,
       },
     })
       .then((res) => res.json())
@@ -16,15 +16,18 @@ const AllSellers = () => {
       });
   }, [toggle]);
 
-  const handleVerify = (email) =>{
-    fetch(`http://localhost:5000/verificationStatus?email=${email}`,{
-      method: "PUT"
-    })
+  const handleVerify = (email) => {
+    fetch(
+      `https://oldruby-server.vercel.app/verificationStatus?email=${email}`,
+      {
+        method: "PUT",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setToggle(!toggle);
       });
-  }
+  };
 
   return (
     <div>
@@ -74,7 +77,10 @@ const AllSellers = () => {
                         Verified
                       </button>
                     ) : (
-                      <button onClick={()=>handleVerify(seller?.email)} className="btn btn-xs bg-blue-400 border-none">
+                      <button
+                        onClick={() => handleVerify(seller?.email)}
+                        className="btn btn-xs bg-blue-400 border-none"
+                      >
                         Verify
                       </button>
                     )}

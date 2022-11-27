@@ -1,18 +1,23 @@
 import React from "react";
 
-const EditStatusModal = ({ editProduct, setEditProduct, setToggle, toggle }) => {
+const EditStatusModal = ({
+  editProduct,
+  setEditProduct,
+  setToggle,
+  toggle,
+}) => {
   const handleSoldOut = (id) => {
-     fetch(`http://localhost:5000/product/${id}`, {
-          method: "PUT"
-     })
-     .then(res => res.json())
-     .then(data =>{
-          if(data?.modifiedCount){
-               setToggle(!toggle)
-               console.log(data);
-               setEditProduct(null)
-          }
-     })
+    fetch(`https://oldruby-server.vercel.app/product/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.modifiedCount) {
+          setToggle(!toggle);
+          console.log(data);
+          setEditProduct(null);
+        }
+      });
   };
 
   return (

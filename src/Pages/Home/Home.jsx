@@ -8,7 +8,8 @@ import Reviews from "../Reviews/Reviews";
 const Home = () => {
   const [advertisedProduct, setAdvertisedProduct] = useState(null);
   useEffect(() => {
-    axios.get("http://localhost:5000/advertised")
+    axios
+      .get("https://oldruby-server.vercel.app/advertised")
       .then((res) => {
         setAdvertisedProduct(res.data);
       })
@@ -43,14 +44,18 @@ const Home = () => {
                   height="24"
                 />
               </svg>
-              <span className="relative text-4xl font-bold sm:text-6xl">Buy</span>
+              <span className="relative text-4xl font-bold sm:text-6xl">
+                Buy
+              </span>
             </span>{" "}
-            <span className="text-4xl font-bold sm:text-6xl">what your desire</span>
+            <span className="text-4xl font-bold sm:text-6xl">
+              what your desire
+            </span>
           </h2>
           <p className="text-base text-gray-700 md:text-lg text-center">
-          Here you can sell your unused mobile phone or you can buy form here.
-          Choose your favourite product and deal directly with the seller
-        </p>
+            Here you can sell your unused mobile phone or you can buy form here.
+            Choose your favourite product and deal directly with the seller
+          </p>
         </div>
         <img src={sellingImg} className="w-full mx-auto md:w-auto" alt="" />
       </div>

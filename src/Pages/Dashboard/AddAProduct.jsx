@@ -8,12 +8,12 @@ import { useNavigate } from "react-router-dom";
 import AuthenticationSpinner from "../Shared/Spinners/AuthenticationSpinner";
 
 const AddAProduct = () => {
-  const [spinner , setSpinner] = useState(false)
+  const [spinner, setSpinner] = useState(false);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleAddProduct = (event) => {
-    setSpinner(true)
+    setSpinner(true);
     event.preventDefault();
     const form = event.target;
     let categoryId = null;
@@ -22,14 +22,14 @@ const AddAProduct = () => {
     const formData = new FormData();
     formData.append("image", image);
     const category = form.category.value;
-    if(category === 'iphone'){
-      categoryId = '637f0b58bba2041a41f73dfd'
-    }else if(category === 'samsung'){
-      categoryId = '637f0b58bba2041a41f73dfe'
-    }else if(category === 'xiaomi'){
-      categoryId = '637f0b58bba2041a41f73dff'
-    }else{
-      categoryId = '637f0b58bba2041a41f73e00'
+    if (category === "iphone") {
+      categoryId = "637f0b58bba2041a41f73dfd";
+    } else if (category === "samsung") {
+      categoryId = "637f0b58bba2041a41f73dfe";
+    } else if (category === "xiaomi") {
+      categoryId = "637f0b58bba2041a41f73dff";
+    } else {
+      categoryId = "637f0b58bba2041a41f73e00";
     }
     const location = form.location.value;
     const resell_price = form.resell_price.value;
@@ -47,7 +47,7 @@ const AddAProduct = () => {
     const reported = false;
     getImageLink(formData).then((imgData) => {
       const img = imgData.data.display_url;
-      fetch(`http://localhost:5000/verification/${user?.email}`)
+      fetch(`https://oldruby-server.vercel.app/verification/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
           const seller_verification = data;
@@ -73,16 +73,20 @@ const AddAProduct = () => {
             categoryId,
           };
 
-          addProduct(product).then((data) => {
-            if (data?.insertedId) {
-              toast.success("Product added successfully.", { duration: 3000 });
-              navigate("/dashboard/myProducts");
-              setSpinner(false)
-            }
-          }).catch(err =>{
-            setSpinner(false)
-            console.log(err);
-          });
+          addProduct(product)
+            .then((data) => {
+              if (data?.insertedId) {
+                toast.success("Product added successfully.", {
+                  duration: 3000,
+                });
+                navigate("/dashboard/myProducts");
+                setSpinner(false);
+              }
+            })
+            .catch((err) => {
+              setSpinner(false);
+              console.log(err);
+            });
         });
     });
   };
@@ -288,7 +292,7 @@ const AddAProduct = () => {
               type="submit"
               className="btn bg-red-700 hover:bg-red-600 border-none"
             >
-              {spinner ? <AuthenticationSpinner/> : 'Add product'}
+              {spinner ? <AuthenticationSpinner /> : "Add product"}
             </button>
           </div>
         </form>

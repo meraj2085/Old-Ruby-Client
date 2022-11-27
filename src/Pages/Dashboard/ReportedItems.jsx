@@ -7,7 +7,7 @@ const ReportedItems = () => {
   const [toggle, setToggle] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/reported")
+    fetch("https://oldruby-server.vercel.app/reported")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [toggle]);

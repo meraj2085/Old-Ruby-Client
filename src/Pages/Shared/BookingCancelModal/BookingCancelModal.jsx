@@ -8,21 +8,21 @@ const BookingCancelModal = ({
   deleteOrder,
   setDeleteOrder,
 }) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const handleDelete = (id) => {
-    setLoading(true)
-    fetch(`http://localhost:5000/booking/${id}`, {
-     method: 'DELETE'
+    setLoading(true);
+    fetch(`https://oldruby-server.vercel.app/booking/${id}`, {
+      method: "DELETE",
     })
-    .then(res => res.json())
-    .then(data =>{
-     if (data?.deletedCount){
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.deletedCount) {
           setToggle(!toggle);
-          toast.success('Product booking cancelled', {duration: 2000})
-          setDeleteOrder(null)
-          setLoading(false)
-     }
-    })
+          toast.success("Product booking cancelled", { duration: 2000 });
+          setDeleteOrder(null);
+          setLoading(false);
+        }
+      });
   };
 
   return (
@@ -49,7 +49,7 @@ const BookingCancelModal = ({
               type="button"
               className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100"
             >
-              {loading ? <AuthenticationSpinner/> : 'Yes'}
+              {loading ? <AuthenticationSpinner /> : "Yes"}
             </button>
             <button
               onClick={() => setDeleteOrder(null)}

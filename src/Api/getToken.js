@@ -7,7 +7,7 @@ export const getToken = (user, role) => {
     seller_verification: false,
   };
 
-  fetch(`http://localhost:5000/user/${user?.email}`, {
+  fetch(`https://oldruby-server.vercel.app/user/${user?.email}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",
@@ -24,7 +24,7 @@ export const token = (user) => {
   const currentUser = {
     email: user.email,
   };
-  fetch("http://localhost:5000/jwt", {
+  fetch("https://oldruby-server.vercel.app/jwt", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -37,14 +37,13 @@ export const token = (user) => {
     });
 };
 
-
 export const getTokenForGmailLogin = (user) => {
   const currentUser = {
     email: user.email,
     role: "Buyer",
   };
 
-  fetch(`http://localhost:5000/user/${user?.email}`, {
+  fetch(`https://oldruby-server.vercel.app/user/${user?.email}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

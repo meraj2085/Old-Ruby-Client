@@ -1,7 +1,7 @@
 ## Project Details
 
 ### `Client live link:` .
-### `Server live link:` .
+### `Server live link:` https://oldruby-server.vercel.app/
 
 
 - Project Name: Old Ruby

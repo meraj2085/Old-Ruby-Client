@@ -8,7 +8,7 @@ const DeleteModal = ({
   toggle,
 }) => {
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://oldruby-server.vercel.app/product/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

@@ -1,5 +1,5 @@
 export const getRole = async (email) => {
-  const res = await fetch(`http://localhost:5000/user/${email}`, {
+  const res = await fetch(`https://oldruby-server.vercel.app/user/${email}`, {
     headers: {
       "content-type": "application/json",
       authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,

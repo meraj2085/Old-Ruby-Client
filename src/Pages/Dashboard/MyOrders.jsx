@@ -10,7 +10,7 @@ const MyOrders = () => {
   const [deleteOrder, setDeleteOrder] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/booked?email=${user?.email}`, {
+    fetch(`https://oldruby-server.vercel.app/booked?email=${user?.email}`, {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,

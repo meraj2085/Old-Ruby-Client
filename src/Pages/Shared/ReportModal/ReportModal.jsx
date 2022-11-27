@@ -6,7 +6,7 @@ const ReportModal = ({ reportedItem, setReportedItem }) => {
   const [loading, setLoading] = useState(false);
   const handleReport = (id) => {
     setLoading(true);
-    fetch(`http://localhost:5000/product/report/${id}`, {
+    fetch(`https://oldruby-server.vercel.app/product/report/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -49,7 +49,8 @@ const ReportModal = ({ reportedItem, setReportedItem }) => {
               onClick={() => setReportedItem(null)}
               type="button"
               className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100"
-            >Cancel
+            >
+              Cancel
             </button>
           </div>
         </div>

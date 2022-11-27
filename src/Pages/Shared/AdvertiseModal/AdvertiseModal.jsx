@@ -8,17 +8,17 @@ const AdvertiseModal = ({
   toggle,
 }) => {
   const handleAdvertise = (id) => {
-    fetch(`http://localhost:5000/product/update/${id}`, {
+    fetch(`https://oldruby-server.vercel.app/product/update/${id}`, {
       method: "PUT",
       headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('OldRuby-Token')}`,
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,
       },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data?.modifiedCount) {
-          toast.success('Advertise successful', {duration: 3000})
+          toast.success("Advertise successful", { duration: 3000 });
           setToggle(!toggle);
           setAdvertiseProduct(null);
         }

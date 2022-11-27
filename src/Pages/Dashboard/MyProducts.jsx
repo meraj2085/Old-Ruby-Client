@@ -13,10 +13,10 @@ const MyProducts = () => {
   const [advertiseProduct, setAdvertiseProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products?email=${user?.email}`, {
+    fetch(`https://oldruby-server.vercel.app/products?email=${user?.email}`, {
       headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('OldRuby-Token')}`,
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("OldRuby-Token")}`,
       },
     })
       .then((res) => res.json())
