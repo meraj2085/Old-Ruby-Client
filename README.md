@@ -11,5 +11,5 @@
 - User can pay using stripe
 - This site is mobile responsive
 
-- Admin email: joni@gmail.com
-- Admin password: 123456
+## Admin email: joni@gmail.com
+## Admin password: 123456
