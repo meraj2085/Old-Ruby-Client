@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import badge from "../../Assets/verified-badge.png";
 
-const AdvertiseCard = ({ product }) => {
+const ProductsCard = ({ product }) => {
   const {
     name,
     img,
@@ -93,4 +93,4 @@ const AdvertiseCard = ({ product }) => {
   );
 };
 
-export default AdvertiseCard;
+export default ProductsCard;

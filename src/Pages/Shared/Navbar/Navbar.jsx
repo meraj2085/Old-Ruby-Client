@@ -19,62 +19,68 @@ const Navbar = () => {
   };
 
   return (
-    <header className="md:px-16 px-5 py-3 bg-gray-100 text-gray-800 align-middle">
-      <div className="container relative flex justify-between mx-auto">
+    <header className="px-5 md:px-0 md:py-2 bg-gray-100 text-gray-800 align-middle">
+      <div className="max-w-[1200px] relative flex justify-between mx-auto">
         <div>
           <Link
-            to="#"
+            to="/"
             aria-label="Company"
             title="Company"
             className="inline-flex items-center"
           >
-            <img className="md:w-[50px] w-[40px]" src={logo} alt="" />
-            <span className="ml-2 text-2xl font-semibold text-gray-800">
-              Old <span className="text-red-700">R</span>uby
-            </span>
+            <img
+              className="md:w-[40px] w-[40px] pt-1 md:pt-0"
+              src={logo}
+              alt="Website logo"
+            />
           </Link>
         </div>
-        <ul className="items-stretch hidden space-x-3 lg:flex">
-          <li className="flex">
-            <Link to="/" className="flex items-center px-4 hover:text-red-700">
-              Home
-            </Link>
-          </li>
-          <li className="flex">
-            <Link
-              to="/dashboard"
-              className="flex items-center px-4 hover:text-red-700"
-            >
-              Dashboard
-            </Link>
-          </li>
-          <li className="flex">
-            <Link
-              to="/blog"
-              className="flex items-center px-4 hover:text-red-700"
-            >
-              Blog
-            </Link>
-          </li>
-        </ul>
-        <div className="items-center flex-shrink-0 hidden lg:flex">
-          {user?.uid ? (
-            <>
-              <p onClick={handleLogOut}>
-                <button className="self-center px-8 py-3 font-semibold rounded bg-red-700 text-gray-50">
-                  Logout
-                </button>
-              </p>
-            </>
-          ) : (
-            <>
-              <Link to="/signIn">
-                <button className="self-center px-8 py-3 font-semibold rounded bg-red-700 text-gray-50">
-                  Sign in
-                </button>
+        <div className="flex gap-5">
+          <ul className="items-stretch hidden space-x-3 lg:flex">
+            <li className="flex">
+              <Link
+                to="/"
+                className="flex items-center px-4 hover:text-red-700"
+              >
+                Home
               </Link>
-            </>
-          )}
+            </li>
+            <li className="flex">
+              <Link
+                to="/products"
+                className="flex items-center px-4 hover:text-red-700"
+              >
+                Products
+              </Link>
+            </li>
+            <li className="flex">
+              <Link
+                to="/dashboard"
+                className="flex items-center px-4 hover:text-red-700"
+              >
+                Dashboard
+              </Link>
+            </li>
+          </ul>
+          <div className="items-center flex-shrink-0 hidden lg:flex">
+            {user?.uid ? (
+              <>
+                <p onClick={handleLogOut}>
+                  <button className="self-center px-6 py-2 font-semibold rounded bg-[#b23a48] text-gray-50">
+                    Logout
+                  </button>
+                </p>
+              </>
+            ) : (
+              <>
+                <Link to="/signIn">
+                  <button className="self-center px-6 py-2 font-semibold rounded bg-[#b23a48] text-gray-50">
+                    Sign in
+                  </button>
+                </Link>
+              </>
+            )}
+          </div>
         </div>
         <button onClick={() => setIsMenuOpen(true)} className="p-4 lg:hidden">
           <svg
@@ -104,9 +110,6 @@ const Navbar = () => {
                     className="inline-flex items-center"
                   >
                     <img className="md:w-[50px] w-[40px]" src={logo} alt="" />
-                    <span className="ml-2 text-2xl font-semibold text-gray-800">
-                      Old <span className="text-red-700">R</span>uby
-                    </span>
                   </Link>
                 </div>
                 <div>
@@ -152,24 +155,24 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <div>
-                  {user?.uid ? (
-                    <>
-                      <li onClick={handleLogOut}>
-                        <button className="flex items-center px-4 hover:text-red-700">
-                          Logout
-                        </button>
-                      </li>
-                    </>
-                  ) : (
-                    <>
-                      <Link to="/signIn">
-                        <button className="flex items-center px-4 hover:text-red-700">
-                          Sign in
-                        </button>
-                      </Link>
-                    </>
-                  )}
-                </div>
+                    {user?.uid ? (
+                      <>
+                        <li onClick={handleLogOut}>
+                          <button className="flex items-center px-4 hover:text-red-700">
+                            Logout
+                          </button>
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <Link to="/signIn">
+                          <button className="flex items-center px-4 hover:text-red-700">
+                            Sign in
+                          </button>
+                        </Link>
+                      </>
+                    )}
+                  </div>
                 </ul>
               </nav>
             </div>
