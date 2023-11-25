@@ -45,7 +45,7 @@ const ProductDetails = () => {
                   </div>
                   <time
                     datetime="2022-10-10"
-                    class="block text-xs text-gray-500"
+                    className="block text-xs text-gray-500"
                   >
                     {postDate}
                   </time>

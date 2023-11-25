@@ -3,10 +3,10 @@ import axios from "axios";
 import ProductsCard from "./ProductsCard";
 
 const Products = () => {
-  const [advertisedProduct, setAdvertisedProduct] = useState(null);
+  const [advertisedProduct, setAdvertisedProduct] = useState([]);
   useEffect(() => {
     axios
-      .get("https://oldruby-server.vercel.app/advertised")
+      .get("https://oldruby-server.vercel.app/all_products")
       .then((res) => {
         setAdvertisedProduct(res.data);
       })
