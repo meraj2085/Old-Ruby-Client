@@ -27,75 +27,124 @@ const ProductDetails = () => {
     _id,
   } = product;
   return (
-    <div>
-      <div className="flex justify-center my-20 mx-5">
-        <div className="card bg-base-100 w-96 shadow-xl">
-          <figure>
-            <img src={img} alt="Shoes" />
-          </figure>
-          <div className="card-body">
-            <div className="flex justify-between">
-              <h2 className="card-title">{name}</h2>
-              <div>
-            <label
-              onClick={() => setReportedItem(product?._id)}
-              htmlFor="ruby-reportModal"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 text-red-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-                />
-              </svg>
-            </label>
+    <div className="max-w-[1200px] mx-auto">
+      <div className="flex justify-center mb-40 mt-28 mx-5">
+        <div className="flex gap-10">
+          <div>
+            <div className="block rounded-lg p-4 shadow-sm shadow-indigo-100 min-w-[300px] max-w-[300px]">
+              <img
+                alt="Product"
+                src={img}
+                className="rounded-md object-cover"
+              />
+              <div className="mt-2">
+                <dl>
+                  <div>
+                    <dt className="sr-only">Product Name</dt>
+                    <dd className="font-medium">{name}</dd>
+                  </div>
+                  <time
+                    datetime="2022-10-10"
+                    class="block text-xs text-gray-500"
+                  >
+                    {postDate}
+                  </time>
+                </dl>
+              </div>
+              <div className="button_part flex justify-end cursor-pointer">
+                <label
+                  onClick={() => setProduct(product)}
+                  htmlFor="ruby-booking-modal"
+                  className="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#b23a48]"
+                >
+                  Book now
+                  <span
+                    aria-hidden="true"
+                    className="block transition-all group-hover:ms-0.5 rtl:rotate-180"
+                  >
+                    &rarr;
+                  </span>
+                </label>
+              </div>
+            </div>
           </div>
-            </div>
-            <div className="flex">
-              <div className="text-lg">Seller: {seller_name}</div>
-              {seller_verification === true && (
-                <div>
-                  <img src={badge} className="w-6 mx-3" alt="" />
-                </div>
-              )}
-            </div>
-            <p>{seller_email}</p>
-            <p>Number: {mobile_number}</p>
-            <p>Original price: {original_price}</p>
-            <p>Resell price: {resell_price}</p>
-            <p>Location: {location}</p>
-            <p>Condition: {condition}</p>
-            <p>Year used: {years_of_use}</p>
-            <p>Year of purchase: {year_of_purchase}</p>
-            <p>Post Date: {postDate}</p>
-            <p>
-              Status: <span className="text-green-500">{status}</span>
-            </p>
-            <p>{description}</p>
-            <div className="card-actions justify-center mt-3">
-              <label
-                onClick={() => setProduct(product)}
-                htmlFor="ruby-booking-modal"
-                className="px-5 py-2 font-semibold border rounded border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100"
-              >
-                Book Now
-              </label>
-            </div>
+          <div className="flow-root">
+            <dl className="divide-y divide-gray-100 text-sm">
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Name</dt>
+                <dd className="text-gray-700 sm:col-span-2">{name}</dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Condition</dt>
+                <dd className="text-gray-700 sm:col-span-2">
+                  {condition.charAt(0).toUpperCase() + condition.slice(1)}
+                </dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Original price</dt>
+                <dd className="text-gray-700 sm:col-span-2">
+                  ${original_price}
+                </dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Resell price</dt>
+                <dd className="text-gray-700 sm:col-span-2">
+                  $1{resell_price}
+                </dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Status</dt>
+                <dd className="text-green-500 sm:col-span-2">
+                  {status.charAt(0).toUpperCase() + status.slice(1)}
+                </dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Year used</dt>
+                <dd className="text-gray-700 sm:col-span-2">{years_of_use}</dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Purchase Year</dt>
+                <dd className="text-gray-700 sm:col-span-2">
+                  {year_of_purchase}
+                </dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Location</dt>
+                <dd className="text-gray-700 sm:col-span-2">{location}</dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Seller</dt>
+                <dd className="text-gray-700 sm:col-span-2">{seller_name}</dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Mobile</dt>
+                <dd className="text-gray-700 sm:col-span-2">{mobile_number}</dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Email</dt>
+                <dd className="text-gray-700 sm:col-span-2">{seller_email}</dd>
+              </div>
+
+              <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">Description</dt>
+                <dd className="text-gray-700 sm:col-span-2">{description}</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </div>
       {selectedProduct && (
-        <BookingModal
-          product={product}
-          setProduct={setProduct}
-        ></BookingModal>
+        <BookingModal product={product} setProduct={setProduct}></BookingModal>
       )}
       {reportedItem && (
         <ReportModal

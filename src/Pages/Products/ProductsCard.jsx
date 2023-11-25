@@ -2,12 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import badge from "../../Assets/verified-badge.png";
 
-const ProductCard = ({
-  product,
-  setProduct,
-  reportedItem,
-  setReportedItem,
-}) => {
+const ProductsCard = ({ product }) => {
   const {
     name,
     img,
@@ -24,30 +19,7 @@ const ProductCard = ({
         <img src={img} alt="Product" />
       </figure>
       <div className="card-body gap-0">
-        <div className="flex justify-between">
-          <h2 className="card-title">{name}</h2>
-          <div>
-            <label
-              onClick={() => setReportedItem(product?._id)}
-              htmlFor="ruby-reportModal"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5 text-red-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-                />
-              </svg>
-            </label>
-          </div>
-        </div>
+        <h2 className="card-title">{name}</h2>
         <div className="flex">
           <div className="text-sm">{seller_name}</div>
           {seller_verification === true && (
@@ -121,6 +93,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
-
-
+export default ProductsCard;

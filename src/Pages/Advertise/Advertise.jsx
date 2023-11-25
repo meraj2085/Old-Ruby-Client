@@ -3,7 +3,7 @@ import AdvertiseCard from "./AdvertiseCard";
 
 const Advertise = ({ advertisedProduct }) => {
   return (
-    <div className="my-10">
+    <div id="" className="my-10">
       <div className="p-4 mb-10 mx-auto text-center md:px-10 lg:px-32 xl:max-w-3xl">
         <h2 className="text-5xl font-semibold leading-none sm:text-4xl">
           <span className="text-red-700">A</span>dvertised
