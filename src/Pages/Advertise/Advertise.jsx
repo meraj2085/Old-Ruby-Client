@@ -8,12 +8,9 @@ const Advertise = ({ advertisedProduct }) => {
         <h2 className="text-5xl font-semibold leading-none sm:text-4xl">
           <span className="text-red-700">A</span>dvertised
         </h2>
-        <p className="px-8 my-4">
+        <p className="px-8 my-2">
           Best products for you are here.
         </p>
-        <div className="flex items-center pt-4 space-x-1">
-          <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
-        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 mx-5 md:mx-0">
         {advertisedProduct.map((product) => (
