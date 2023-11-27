@@ -28,7 +28,7 @@ const ProductsCard = ({ product }) => {
             </div>
           )}
         </div>
-        <p className="mt-5">
+        <p className="mt-3">
           {description?.length > 50
             ? `${description.slice(0, 50)}...`
             : description}

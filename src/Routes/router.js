@@ -46,11 +46,7 @@ export const router = createBrowserRouter([
         path: "/category/:id",
         loader: ({ params }) =>
           fetch(`https://oldruby-server.vercel.app/category/${params.id}`),
-        element: (
-          <PrivateRoute>
-            <CategoryProducts></CategoryProducts>
-          </PrivateRoute>
-        ),
+        element: <CategoryProducts></CategoryProducts>,
       },
       {
         path: "/product/:id",
